@@ -9,7 +9,7 @@ const debug = process.env.NODE_ENV !== 'production';
 module.exports = {
   context: __dirname,
   devtool: debug ? 'inline-sourcemap' : null,
-  entry: './app/js/main.js',
+  entry: './src/app/main.js',
   module: {
     loaders: [
       {
@@ -43,7 +43,7 @@ module.exports = {
     tls: 'empty'
   },
   output: {
-    path: `${__dirname}/public/js`,
+    path: `${__dirname}/src/public/js`,
     filename: 'scripts.min.js',
   },
   plugins: debug ? [

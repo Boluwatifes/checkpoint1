@@ -4,7 +4,8 @@
   "description": "Andela24 brings news from over 70 different news sources together on a single plartform",
   "main": "server.js",
   "scripts": {
-    "test": "mocha test"
+    "test": "mocha test",
+    "start": "node_modules/.bin/webpack-dev-server --content-base src/public --inline"
   },
   "repository": {
     "type": "git",
@@ -40,21 +41,26 @@
   "dependencies": {
     "axios": "^0.16.1",
     "babel-core": "^6.24.1",
+    "babel-eslint": "^7.2.3",
     "babel-loader": "^7.0.0",
+    "babel-plugin-react-html-attrs": "^*",
+    "babel-plugin-transform-class-properties": "^*",
+    "babel-plugin-transform-decorators-legacy": "^*",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4",
+    "babel-preset-stage-0": "^6.24.1",
     "chai": "^3.5.0",
+    "flux": "^3.1.2",
     "http-server": "^0.9.0",
     "jquery": "^3.2.1",
     "json-loader": "^0.5.4",
-    "flux": "^3.1.2",
     "mocha": "^2.1.0",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-google-login": "^2.8.9",
+    "react-router": "^4.1.1",
+    "react-router-dom": "^4.1.1",
     "webpack": "^*",
-    "babel-plugin-react-html-attrs": "^*",
-    "babel-plugin-transform-class-properties": "^*",
-    "babel-plugin-transform-decorators-legacy": "^*"
+    "webpack-dev-server": "^2.4.5"
   }
 }
