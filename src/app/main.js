@@ -2,7 +2,7 @@ import {
   BrowserRouter as Router,
   Route,
   Redirect,
-  withRouter
+  withRouter,
 } from 'react-router-dom';
 import React from 'react';
 import ReactDom from 'react-dom';

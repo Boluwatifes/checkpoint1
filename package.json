@@ -60,6 +60,7 @@
     "react-google-login": "^2.8.9",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
+    "request": "^2.81.0",
     "webpack": "^*",
     "webpack-dev-server": "^2.4.5"
   }

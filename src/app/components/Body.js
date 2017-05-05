@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
 import React from 'react';
+import GoogleLogin from 'react-google-login';
 
 export default class Body extends React.Component {
   constructor() {
@@ -10,6 +10,17 @@ export default class Body extends React.Component {
       url: localStorage.getItem('user') ? '/portal' : '/login',
     };
   }
+
+  responseGoogle(response) {
+    const profile = response.getBasicProfile();
+    const user = {};
+    user.name = profile.getName();
+    user.email = profile.getEmail();
+    user.image = profile.getEmail();
+    localStorage.setItem('user', profile.getName());
+    window.location = '/portal';
+  }
+
   render() {
     return (
       <div className="col s12 home-inner">
@@ -18,17 +29,26 @@ export default class Body extends React.Component {
             <div className="section no-pad-bot">
               <div className="container">
                 <br /><br />
-                <h1 className="header center teal-text text-lighten-2">Hi { this.state.user }!</h1>
+                <h1 className="header center teal-text text-lighten-2">Hi Guest!</h1>
                 <div className="row center">
                   <h5 className="header col s12 light">Fast News brings to you all your favorite news at your comfort. News can't get any better with 70+ news source!</h5>
                 </div>
                 <div className="row center">
-                  <Link class="btn-large waves-effect waves-light teal lighten-1" to={this.state.url}>{ this.state.buttonText }</Link>
+                  <GoogleLogin
+                    clientId="180417168863-aukt9omvuvpg25ernnc6lgupuv4m3uno.apps.googleusercontent.com"
+                    onSuccess={this.responseGoogle}
+                    onFailure={this.responseGoogle}
+                    tag="span"
+                    disabled="false"
+                    style={{ opacity: 1 }}
+                  >
+                    <span className="waves-effect waves-light btn-large"><i className="fa fa-google" /> Login With Google</span>
+                  </GoogleLogin>
                 </div>
                 <br />
               </div>
             </div>
-            <div className="parallax"><img src="background1.jpg" alt="Unsplashed background img 1" /></div>
+            <div className="parallax" />
           </div>
         </div>
         <div className="clear" />

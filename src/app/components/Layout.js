@@ -15,13 +15,17 @@ export default class Layout extends React.Component {
       <div className="width-100">
         <Header />
         <div className="row home-div m-0">
-          <Route path="/" exact component={Body} />
+          <Route
+            exact path="/" render={() => (
+              <Body />
+          )}
+          />
           <Route path="/login" component={Login} />
           <Route path="/favorites" component={Favorites} />
           <Route path="/portal" component={Portal} />
           <div className="clear" />
         </div>
       </div>
-    )
+    );
   }
 }
