@@ -1,0 +1,61 @@
+@import "../materialize/sass/materialize";
+@import url('https://fonts.googleapis.com/css?family=Lato|Poiret+One|Raleway');
+
+$myWidth: 100%;
+$myHeight: 100%;
+$myPadding: 40px;
+
+
+html, body {
+  padding: 0;
+  margin: 0;
+  font-family: Lato,Helvetica,Arial,sans-serif;
+}
+
+.clear{
+  clear: both;
+}
+
+.h-auto{
+  height:auto;
+}
+.m-0{
+  margin: 0;
+}
+
+.p-10 {
+  padding: $myPadding / 4;
+}
+
+.width-100{
+  width: $myWidth;
+}
+
+#app{
+  margin:0;
+  padding:0;
+}
+
+nav{
+  background-color: #5cc7b2;
+}
+
+.home-div{
+  height: auto;
+  position: relative;
+  display: flex;
+
+  .home-inner {
+    @extend .valign-wrapper;
+    min-height: 87vh;
+    box-sizing: border-box;
+    background-color: #fff;
+    padding: $myPadding;
+
+    .inner-content{
+      @extend .center-align;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+  }
+}

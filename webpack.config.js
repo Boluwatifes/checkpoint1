@@ -1,7 +1,5 @@
 const webpack = require('webpack');
 
-const path = require('path');
-
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const debug = process.env.NODE_ENV !== 'production';
@@ -9,7 +7,7 @@ const debug = process.env.NODE_ENV !== 'production';
 module.exports = {
   context: __dirname,
   devtool: debug ? 'inline-sourcemap' : null,
-  entry: './app/js/main.js',
+  entry: './src/app/main.js',
   module: {
     loaders: [
       {
@@ -25,13 +23,13 @@ module.exports = {
         test: /\.scss$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          //resolve-url-loader may be chained before sass-loader if necessary
-          use: ['css-loader', 'sass-loader']
+          // resolve-url-loader may be chained before sass-loader if necessary
+          use: ['css-loader', 'sass-loader'],
         }),
       },
       {
         test: /\.(png|woff|woff2|eot|ttf|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'url-loader?limit=100000'
+        loader: 'url-loader?limit=100000',
       },
       { test: /\.json$/, loader: 'json-loader' },
     ],
@@ -40,32 +38,36 @@ module.exports = {
     console: true,
     fs: 'empty',
     net: 'empty',
-    tls: 'empty'
+    tls: 'empty',
   },
   output: {
-    path: `${__dirname}/public/js`,
+    path: `${__dirname}/src/public/js`,
     filename: 'scripts.min.js',
+    publicPath: '/',
+  },
+  devServer: {
+    historyApiFallback: true,
   },
   plugins: debug ? [
-    new ExtractTextPlugin(`../css/style.css`),
+    new ExtractTextPlugin('../css/style.css'),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
       'window.$': 'jquery',
       'window.jQuery': 'jquery',
-      "Hammer": "hammerjs/hammer"
+      Hammer: 'hammerjs/hammer',
     }),
   ] : [
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
-    new ExtractTextPlugin({ filename: `../css/style.css`,  allChunks: true }),
+    new ExtractTextPlugin('../css/style.css'),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
       'window.$': 'jquery',
       'window.jQuery': 'jquery',
-      "Hammer": "hammerjs/hammer"
+      Hammer: 'hammerjs/hammer',
     }),
   ],
 };
