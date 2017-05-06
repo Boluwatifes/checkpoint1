@@ -6,6 +6,7 @@ class NewsStore extends EventEmitter {
   constructor() {
     super();
     this.sources = [];
+    this.articles = [];
     this.handleActions = this.handleActions.bind(this);
   }
 
@@ -22,10 +23,19 @@ class NewsStore extends EventEmitter {
     return this.sources;
   }
 
+  getArticles() {
+    return this.articles;
+  }
+
   handleActions(action) {
     switch (action.type) {
       case 'GET_ALL_SOURCES': {
         this.sources = action.sources;
+        this.emit('change');
+        break;
+      }
+      case 'FETCH_ARTICLES': {
+        this.articles = action.articles;
         this.emit('change');
         break;
       }

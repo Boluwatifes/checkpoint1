@@ -6687,6 +6687,14 @@ html, body {
   margin: 0;
   font-family: Lato,Helvetica,Arial,sans-serif; }
 
+.avatar-img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%; }
+
+.art {
+  min-height: 400px !important; }
+
 .clear {
   clear: both; }
 
@@ -6721,5 +6729,11 @@ nav {
     .home-div .home-inner .inner-content {
       max-width: 700px;
       margin: 0 auto; }
+
+.mySelect {
+  height: 50px;
+  margin-top: 20px; }
+  .mySelect select {
+    display: block; }
 
 /*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiIuLi9jc3Mvc3R5bGUuY3NzIiwic291cmNlUm9vdCI6IiJ9*/

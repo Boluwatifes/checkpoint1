@@ -1,5 +1,5 @@
 import dispatcher from '../dispatcher';
-import apiAll from '../utils/api';
+import { apiAll, apiOne } from '../utils/api';
 
 export function getSources() {
   apiAll((data) => {
@@ -9,12 +9,13 @@ export function getSources() {
     });
   });
 }
-window.no = getSources;
 
-export function getArticle(source) {
-  dispatcher.dispatch({
-    type: 'FETCH_SOURCE',
-    source,
+export function getArticles(source) {
+  apiOne(source, (data) => {
+    dispatcher.dispatch({
+      type: 'FETCH_ARTICLES',
+      articles: data,
+    });
   });
 }
 

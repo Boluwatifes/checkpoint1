@@ -13,46 +13,44 @@ export default class Body extends React.Component {
 
   responseGoogle(response) {
     const profile = response.getBasicProfile();
-    const user = {};
-    user.name = profile.getName();
-    user.email = profile.getEmail();
-    user.image = profile.getEmail();
-    localStorage.setItem('user', profile.getName());
-    window.location = '/portal';
+    localStorage.username = profile.getName();
+    localStorage.email = profile.getEmail();
+    localStorage.image = profile.getImageUrl();
+    location.reload();
   }
 
   render() {
     return (
-      <div className="col s12 home-inner">
-        <div className="inner-content">
-          <div id="index-banner" className="parallax-container">
-            <div className="section no-pad-bot">
-              <div className="container">
-                <br /><br />
-                <h1 className="header center teal-text text-lighten-2">Hi Guest!</h1>
-                <div className="row center">
-                  <h5 className="header col s12 light">Fast News brings to you all your favorite news at your comfort. News can't get any better with 70+ news source!</h5>
+        <div className="col s12 home-inner">
+          <div className="inner-content">
+            <div id="index-banner" className="parallax-container">
+              <div className="section no-pad-bot">
+                <div className="container">
+                  <br /><br />
+                  <h1 className="header center teal-text text-lighten-2">Hi Guest!</h1>
+                  <div className="row center">
+                    <h5 className="header col s12 light">Fast News brings to you all your favorite news at your comfort. News can't get any better with 70+ news source!</h5>
+                  </div>
+                  <div className="row center">
+                    <GoogleLogin
+                      clientId="180417168863-aukt9omvuvpg25ernnc6lgupuv4m3uno.apps.googleusercontent.com"
+                      onSuccess={this.responseGoogle}
+                      onFailure={this.responseGoogle}
+                      tag="span"
+                      disabled="false"
+                      style={{ opacity: 1 }}
+                    >
+                      <span className="waves-effect waves-light btn-large"><i className="fa fa-google" /> Login With Google</span>
+                    </GoogleLogin>
+                  </div>
+                  <br />
                 </div>
-                <div className="row center">
-                  <GoogleLogin
-                    clientId="180417168863-aukt9omvuvpg25ernnc6lgupuv4m3uno.apps.googleusercontent.com"
-                    onSuccess={this.responseGoogle}
-                    onFailure={this.responseGoogle}
-                    tag="span"
-                    disabled="false"
-                    style={{ opacity: 1 }}
-                  >
-                    <span className="waves-effect waves-light btn-large"><i className="fa fa-google" /> Login With Google</span>
-                  </GoogleLogin>
-                </div>
-                <br />
               </div>
+              <div className="parallax" />
             </div>
-            <div className="parallax" />
           </div>
+          <div className="clear" />
         </div>
-        <div className="clear" />
-      </div>
     );
   }
 }
