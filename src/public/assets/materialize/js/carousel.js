@@ -1,9 +1,8 @@
 (function ($) {
+  const methods = {
 
-  var methods = {
-
-    init : function(options) {
-      var defaults = {
+    init(options) {
+      const defaults = {
         duration: 200, // ms
         dist: -100, // zoom scale TODO: make this more intuitive as an option
         shift: 0, // spacing for center image
@@ -11,39 +10,55 @@
         fullWidth: false, // Change to full width styles
         indicators: false, // Toggle indicators
         noWrap: false, // Don't wrap around and cycle through items.
-        onCycleTo: null // Callback for when a new slide is cycled to.
+        onCycleTo: null, // Callback for when a new slide is cycled to.
       };
       options = $.extend(defaults, options);
-      var namespace = Materialize.objectSelectorString($(this));
+      const namespace = Materialize.objectSelectorString($(this));
 
-      return this.each(function(i) {
-
-        var uniqueNamespace = namespace+i;
-        var images, item_width, item_height, offset, center, pressed, dim, count,
-            reference, referenceY, amplitude, target, velocity, scrolling,
-            xform, frame, timestamp, ticker, dragged, vertical_dragged;
-        var $indicators = $('<ul class="indicators"></ul>');
-        var scrollingTimeout = null;
+      return this.each(function (i) {
+        const uniqueNamespace = namespace + i;
+        let images,
+          item_width,
+          item_height,
+          offset,
+          center,
+          pressed,
+          dim,
+          count,
+          reference,
+          referenceY,
+          amplitude,
+          target,
+          velocity,
+          scrolling,
+          xform,
+          frame,
+          timestamp,
+          ticker,
+          dragged,
+          vertical_dragged;
+        const $indicators = $('<ul class="indicators"></ul>');
+        let scrollingTimeout = null;
 
 
         // Initialize
-        var view = $(this);
-        var showIndicators = view.attr('data-indicators') || options.indicators;
+        const view = $(this);
+        const showIndicators = view.attr('data-indicators') || options.indicators;
 
 
         // Options
-        var setCarouselHeight = function() {
-          var firstImage = view.find('.carousel-item img').first();
+        const setCarouselHeight = function () {
+          const firstImage = view.find('.carousel-item img').first();
           if (firstImage.length) {
             if (firstImage.prop('complete')) {
               view.css('height', firstImage.height());
             } else {
-              firstImage.on('load', function(){
+              firstImage.on('load', function () {
                 view.css('height', $(this).height());
               });
             }
           } else {
-            var imageHeight = view.find('.carousel-item').first().height();
+            const imageHeight = view.find('.carousel-item').first().height();
             view.css('height', imageHeight);
           }
         };
@@ -81,7 +96,7 @@
         view.find('.carousel-item').each(function (i) {
           images.push($(this)[0]);
           if (showIndicators) {
-            var $indicator = $('<li class="indicator-item"></li>');
+            const $indicator = $('<li class="indicator-item"></li>');
 
             // Add active to first by default.
             if (i === 0) {
@@ -92,7 +107,7 @@
             $indicator.click(function (e) {
               e.stopPropagation();
 
-              var index = $(this).index();
+              const index = $(this).index();
               cycleTo(index);
             });
             $indicators.append($indicator);
@@ -151,14 +166,21 @@
           if (scrollingTimeout != null) {
             window.clearTimeout(scrollingTimeout);
           }
-          scrollingTimeout = window.setTimeout(function() {
+          scrollingTimeout = window.setTimeout(() => {
             scrolling = false;
             view.removeClass('scrolling');
           }, options.duration);
 
           // Start actual scroll
-          var i, half, delta, dir, tween, el, alignment, xTranslation;
-          var lastCenter = center;
+          let i,
+            half,
+            delta,
+            dir,
+            tween,
+            el,
+            alignment,
+            xTranslation;
+          const lastCenter = center;
 
           offset = (typeof x === 'number') ? x : offset;
           center = Math.floor((offset + dim / 2) / dim);
@@ -168,16 +190,16 @@
           half = count >> 1;
 
           if (!options.fullWidth) {
-            alignment = 'translateX(' + (view[0].clientWidth - item_width) / 2 + 'px) ';
-            alignment += 'translateY(' + (view[0].clientHeight - item_height) / 2 + 'px)';
+            alignment = `translateX(${(view[0].clientWidth - item_width) / 2}px) `;
+            alignment += `translateY(${(view[0].clientHeight - item_height) / 2}px)`;
           } else {
             alignment = 'translateX(0)';
           }
 
           // Set indicator active
           if (showIndicators) {
-            var diff = (center % count);
-            var activeIndicator = $indicators.find('.indicator-item.active');
+            const diff = (center % count);
+            const activeIndicator = $indicators.find('.indicator-item.active');
             if (activeIndicator.index() !== diff) {
               activeIndicator.removeClass('active');
               $indicators.find('.indicator-item').eq(diff).addClass('active');
@@ -194,13 +216,12 @@
               view.find('.carousel-item').removeClass('active');
               $(el).addClass('active');
             }
-            el.style[xform] = alignment +
-              ' translateX(' + (-delta / 2) + 'px)' +
-              ' translateX(' + (dir * options.shift * tween * i) + 'px)' +
-              ' translateZ(' + (options.dist * tween) + 'px)';
+            el.style[xform] = `${alignment
+              } translateX(${-delta / 2}px)` +
+              ` translateX(${dir * options.shift * tween * i}px)` +
+              ` translateZ(${options.dist * tween}px)`;
             el.style.zIndex = 0;
-            if (options.fullWidth) { tweenedOpacity = 1; }
-            else { tweenedOpacity = 1 - 0.2 * tween; }
+            if (options.fullWidth) { tweenedOpacity = 1; } else { tweenedOpacity = 1 - 0.2 * tween; }
             el.style.opacity = tweenedOpacity;
             el.style.display = 'block';
           }
@@ -217,9 +238,9 @@
             // Don't show wrapped items.
             if (!options.noWrap || center + i < count) {
               el = images[wrap(center + i)];
-              el.style[xform] = alignment +
-                ' translateX(' + (options.shift + (dim * i - delta) / 2) + 'px)' +
-                ' translateZ(' + zTranslation + 'px)';
+              el.style[xform] = `${alignment
+                } translateX(${options.shift + (dim * i - delta) / 2}px)` +
+                ` translateZ(${zTranslation}px)`;
               el.style.zIndex = -i;
               el.style.opacity = tweenedOpacity;
               el.style.display = 'block';
@@ -237,9 +258,9 @@
             // Don't show wrapped items.
             if (!options.noWrap || center - i >= 0) {
               el = images[wrap(center - i)];
-              el.style[xform] = alignment +
-                ' translateX(' + (-options.shift + (-dim * i - delta) / 2) + 'px)' +
-                ' translateZ(' + zTranslation + 'px)';
+              el.style[xform] = `${alignment
+                } translateX(${-options.shift + (-dim * i - delta) / 2}px)` +
+                ` translateZ(${zTranslation}px)`;
               el.style.zIndex = -i;
               el.style.opacity = tweenedOpacity;
               el.style.display = 'block';
@@ -250,27 +271,29 @@
           // Don't show wrapped items.
           if (!options.noWrap || (center >= 0 && center < count)) {
             el = images[wrap(center)];
-            el.style[xform] = alignment +
-              ' translateX(' + (-delta / 2) + 'px)' +
-              ' translateX(' + (dir * options.shift * tween) + 'px)' +
-              ' translateZ(' + (options.dist * tween) + 'px)';
+            el.style[xform] = `${alignment
+              } translateX(${-delta / 2}px)` +
+              ` translateX(${dir * options.shift * tween}px)` +
+              ` translateZ(${options.dist * tween}px)`;
             el.style.zIndex = 0;
-            if (options.fullWidth) { tweenedOpacity = 1; }
-            else { tweenedOpacity = 1 - 0.2 * tween; }
+            if (options.fullWidth) { tweenedOpacity = 1; } else { tweenedOpacity = 1 - 0.2 * tween; }
             el.style.opacity = tweenedOpacity;
             el.style.display = 'block';
           }
 
           // onCycleTo callback
           if (lastCenter !== center &&
-              typeof(options.onCycleTo) === "function") {
-            var $curr_item = view.find('.carousel-item').eq(wrap(center));
+              typeof (options.onCycleTo) === 'function') {
+            const $curr_item = view.find('.carousel-item').eq(wrap(center));
             options.onCycleTo.call(this, $curr_item, dragged);
           }
         }
 
         function track() {
-          var now, elapsed, delta, v;
+          let now,
+            elapsed,
+            delta,
+            v;
 
           now = Date.now();
           elapsed = now - timestamp;
@@ -283,16 +306,17 @@
         }
 
         function autoScroll() {
-          var elapsed, delta;
+          let elapsed,
+            delta;
 
           if (amplitude) {
             elapsed = Date.now() - timestamp;
             delta = amplitude * Math.exp(-elapsed / options.duration);
             if (delta > 2 || delta < -2) {
-                scroll(target - delta);
-                requestAnimationFrame(autoScroll);
+              scroll(target - delta);
+              requestAnimationFrame(autoScroll);
             } else {
-                scroll(target);
+              scroll(target);
             }
           }
         }
@@ -303,10 +327,9 @@
             e.preventDefault();
             e.stopPropagation();
             return false;
-
           } else if (!options.fullWidth) {
-            var clickedIndex = $(e.target).closest('.carousel-item').index();
-            var diff = (center % count) - clickedIndex;
+            const clickedIndex = $(e.target).closest('.carousel-item').index();
+            const diff = (center % count) - clickedIndex;
 
             // Disable clicks if carousel was shifted by click
             if (diff !== 0) {
@@ -318,13 +341,12 @@
         }
 
         function cycleTo(n) {
-          var diff = (center % count) - n;
+          let diff = (center % count) - n;
 
           // Account for wraparound.
           if (!options.noWrap) {
             if (diff < 0) {
               if (Math.abs(diff + count) < Math.abs(diff)) { diff += count; }
-
             } else if (diff > 0) {
               if (Math.abs(diff - count) < diff) { diff -= count; }
             }
@@ -333,7 +355,6 @@
           // Call prev or next accordingly.
           if (diff < 0) {
             view.trigger('carouselNext', [Math.abs(diff)]);
-
           } else if (diff > 0) {
             view.trigger('carouselPrev', [diff]);
           }
@@ -355,7 +376,9 @@
         }
 
         function drag(e) {
-          var x, delta, deltaY;
+          let x,
+            delta,
+            deltaY;
           if (pressed) {
             x = xpos(e);
             y = ypos(e);
@@ -368,13 +391,11 @@
                 reference = x;
                 scroll(offset + delta);
               }
-
             } else if (dragged) {
               // If dragging don't allow vertical scroll.
               e.preventDefault();
               e.stopPropagation();
               return false;
-
             } else {
               // Vertical scrolling.
               vertical_dragged = true;
@@ -424,8 +445,8 @@
         }
 
         xform = 'transform';
-        ['webkit', 'Moz', 'O', 'ms'].every(function (prefix) {
-          var e = prefix + 'Transform';
+        ['webkit', 'Moz', 'O', 'ms'].every((prefix) => {
+          const e = `${prefix}Transform`;
           if (typeof document.body.style[e] !== 'undefined') {
             xform = e;
             return false;
@@ -434,7 +455,7 @@
         });
 
 
-        $(window).off('resize.carousel-'+uniqueNamespace).on('resize.carousel-'+uniqueNamespace, function() {
+        $(window).off(`resize.carousel-${uniqueNamespace}`).on(`resize.carousel-${uniqueNamespace}`, () => {
           if (options.fullWidth) {
             item_width = view.find('.carousel-item').first().innerWidth();
             item_height = view.find('.carousel-item').first().innerHeight();
@@ -449,7 +470,7 @@
         setupEvents();
         scroll(offset);
 
-        $(this).on('carouselNext', function(e, n) {
+        $(this).on('carouselNext', (e, n) => {
           if (n === undefined) {
             n = 1;
           }
@@ -461,7 +482,7 @@
           }
         });
 
-        $(this).on('carouselPrev', function(e, n) {
+        $(this).on('carouselPrev', (e, n) => {
           if (n === undefined) {
             n = 1;
           }
@@ -473,38 +494,33 @@
           }
         });
 
-        $(this).on('carouselSet', function(e, n) {
+        $(this).on('carouselSet', (e, n) => {
           if (n === undefined) {
             n = 0;
           }
           cycleTo(n);
         });
-
       });
-
-
-
     },
-    next : function(n) {
+    next(n) {
       $(this).trigger('carouselNext', [n]);
     },
-    prev : function(n) {
+    prev(n) {
       $(this).trigger('carouselPrev', [n]);
     },
-    set : function(n) {
+    set(n) {
       $(this).trigger('carouselSet', [n]);
-    }
+    },
   };
 
 
-    $.fn.carousel = function(methodOrOptions) {
-      if ( methods[methodOrOptions] ) {
-        return methods[ methodOrOptions ].apply( this, Array.prototype.slice.call( arguments, 1 ));
-      } else if ( typeof methodOrOptions === 'object' || ! methodOrOptions ) {
+  $.fn.carousel = function (methodOrOptions) {
+    if (methods[methodOrOptions]) {
+      return methods[methodOrOptions].apply(this, Array.prototype.slice.call(arguments, 1));
+    } else if (typeof methodOrOptions === 'object' || !methodOrOptions) {
         // Default to "init"
-        return methods.init.apply( this, arguments );
-      } else {
-        $.error( 'Method ' +  methodOrOptions + ' does not exist on jQuery.carousel' );
-      }
-    }; // Plugin end
-}( jQuery ));
+      return methods.init.apply(this, arguments);
+    }
+    $.error(`Method ${methodOrOptions} does not exist on jQuery.carousel`);
+  }; // Plugin end
+}(jQuery));

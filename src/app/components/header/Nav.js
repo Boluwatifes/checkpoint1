@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 
 export default class Nav extends React.Component {
   checkLogin() {
-    let test = true;
+    const test = true;
     const nav = test ? this.loggedIn : this.notLoggedIn;
     return nav;
   }
 
-  loggedIn () {
+  loggedIn() {
     return (
       <nav className="h-auto p-10">
         <div className="nav-wrapper">
@@ -30,7 +30,7 @@ export default class Nav extends React.Component {
     );
   }
 
-  notLoggedIn () {
+  notLoggedIn() {
     return (
       <nav className="h-auto p-10">
         <div className="nav-wrapper">
@@ -49,6 +49,6 @@ export default class Nav extends React.Component {
   }
 
   render() {
-    { checkLogin }
+    { checkLogin; }
   }
 }

@@ -1,7 +1,6 @@
 import {
   Route,
-  Redirect,
-  withRouter } from 'react-router-dom';
+ Switch } from 'react-router-dom';
 import React from 'react';
 import Header from './Header';
 import Body from './Body';
@@ -11,17 +10,24 @@ import Portal from './Portal';
 
 export default class Layout extends React.Component {
   render() {
+    const NotFound = () => {
+      return (
+        <h2>Page Not Found! </h2>
+      );
+    };
     return (
       <div className="width-100">
         <Header />
         <div className="row home-div m-0">
-          <Route path="/" exact component={Body} />
-          <Route path="/login" component={Login} />
-          <Route path="/favorites" component={Favorites} />
-          <Route path="/portal" component={Portal} />
-          <div className="clear" />
+          <Switch>
+            <Route exact path="/" component={localStorage.username ? Portal : Body} />
+            <Route path="/login" component={Login} />
+            <Route path="/favorites" component={Favorites} />
+            <Route component={NotFound} />
+            <div className="clear" />
+          </Switch>
         </div>
       </div>
-    )
+    );
   }
 }
