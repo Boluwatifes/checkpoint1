@@ -16,6 +16,7 @@ export default class Portal extends React.Component {
     NewsAction.getArticles('bbc-news');
     this.getSources = this.getSources.bind(this);
     this.getArticles = this.getArticles.bind(this);
+    this.processClick = this.processClick.bind(this);
   }
 
   componentDidMount() {
@@ -34,6 +35,14 @@ export default class Portal extends React.Component {
     this.setState({
       articles: newsStore.getArticles(),
       loading: false,
+    });
+  }
+
+  processClick(e) {
+    NewsAction.getArticles(e.target.value)
+    this.setState({
+      source: e.target.value,
+      articles: newsStore.getSources(),
     });
   }
 
@@ -60,7 +69,7 @@ export default class Portal extends React.Component {
       );
     } else {
       Articles = this.state.articles.map(article => (
-        <div key={article.publishedAt} className="col s12 m6 l4">
+        <div key={article.title} className="col s12 m6 l4">
           <div className="card art">
             <div className="card-image waves-effect waves-block waves-light">
               <img className="activator" src={article.urlToImage} />
@@ -86,7 +95,7 @@ export default class Portal extends React.Component {
             <h5> Showing News from {currentSource} </h5>
           </div>
           <div className="col s12 m6 l5">
-            <select>
+            <select onChange={this.processClick}>
               <option value="">Please Select a News Source</option>
               {Display}
             </select>

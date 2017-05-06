@@ -6731,8 +6731,8 @@ nav {
       margin: 0 auto; }
 
 .mySelect {
-  height: 50px;
-  margin-top: 20px; }
+  min-height: 50px;
+  margin: 20px 0px; }
   .mySelect select {
     display: block; }
 

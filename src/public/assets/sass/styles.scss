@@ -69,8 +69,8 @@ nav{
 }
 
 .mySelect {
-  height: 50px;
-  margin-top: 20px;
+  min-height: 50px;
+  margin: 20px 0px;
   select {
     display: block;
 
