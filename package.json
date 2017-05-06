@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "mocha test",
-    "start": "node_modules/.bin/webpack-dev-server --content-base src/public --inline"
+    "start": "webpack-dev-server --content-base src/public"
   },
   "repository": {
     "type": "git",
