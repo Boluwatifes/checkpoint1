@@ -9,14 +9,22 @@ export default class Body extends React.Component {
       buttonText: localStorage.getItem('user') ? 'Go To Portal' : 'Get Started',
       url: localStorage.getItem('user') ? '/portal' : '/login',
     };
+    this.responseGoogle = this.responseGoogle.bind(this);
+    this.errorGoogle = this.errorGoogle.bind(this);
   }
 
   responseGoogle(response) {
     const profile = response.getBasicProfile();
-    localStorage.username = profile.getName();
-    localStorage.email = profile.getEmail();
-    localStorage.image = profile.getImageUrl();
+    const user = {};
+    user.name = profile.getName();
+    user.email = profile.getEmail();
+    user.image = profile.getImageUrl();
+    localStorage.setItem('user', JSON.stringify(user));
     location.reload();
+  }
+
+  errorGoogle(response) {
+    console.log(response);
   }
 
   render() {
@@ -35,7 +43,7 @@ export default class Body extends React.Component {
                     <GoogleLogin
                       clientId="180417168863-aukt9omvuvpg25ernnc6lgupuv4m3uno.apps.googleusercontent.com"
                       onSuccess={this.responseGoogle}
-                      onFailure={this.responseGoogle}
+                      onFailure={this.errorGoogle}
                       tag="span"
                       disabled="false"
                       style={{ opacity: 1 }}

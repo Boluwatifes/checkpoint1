@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React from 'react';
 import newsStore from '../stores/NewsStore';
 import * as NewsAction from '../actions/NewsAction';
@@ -7,42 +8,67 @@ export default class Portal extends React.Component {
     super();
     this.state = {
       sources: [],
-      loading: true,
-      done: true,
       source: 'bbc-news',
       articles: [],
+      sortBy: [],
+      currentSort: '',
+      loading: true,
+      done: true,
     };
     NewsAction.getSources();
-    NewsAction.getArticles('bbc-news');
+    NewsAction.getArticles('bbc-news', '');
     this.getSources = this.getSources.bind(this);
     this.getArticles = this.getArticles.bind(this);
     this.processClick = this.processClick.bind(this);
+    this.processSort = this.processSort.bind(this);
   }
 
-  componentDidMount() {
+  componentWillMount() {
     newsStore.on('change', this.getSources);
     newsStore.on('change', this.getArticles);
   }
 
   getSources() {
+    const rawSources = newsStore.getSources();
+    const sortBy = _.filter(rawSources, ['id', 'bbc-news'])[0].sortBysAvailable;
     this.setState({
-      sources: newsStore.getSources(),
+      sources: rawSources,
+      sortBy,
       done: false,
+      sorting: false,
     });
   }
 
   getArticles() {
+    const rawSources = newsStore.getSources();
+    const sortBy = _.filter(rawSources, ['id', this.state.source])[0].sortBysAvailable;
     this.setState({
-      articles: newsStore.getArticles(),
+      articles: newsStore.getArticles().articles,
+      currentSort: newsStore.getArticles().sortBy,
+      sortBy,
       loading: false,
+      sorting: false,
     });
   }
 
   processClick(e) {
-    NewsAction.getArticles(e.target.value)
+    NewsAction.getArticles(e.target.value, '');
     this.setState({
       source: e.target.value,
-      articles: newsStore.getSources(),
+      articles: newsStore.getArticles().articles,
+      currentSort: newsStore.getArticles().sortBy,
+      loading: false,
+      sorting: false,
+    });
+  }
+
+  processSort(e) {
+    NewsAction.getArticles(this.state.source, e.target.value);
+    this.setState({
+      articles: newsStore.getArticles().articles,
+      currentSort: e.target.value,
+      loading: false,
+      sorting: false,
     });
   }
 
@@ -88,16 +114,33 @@ export default class Portal extends React.Component {
     }
 
     const currentSource = this.state.source.replace('-', ' ').toUpperCase();
+
+    let sortBy = '';
+    if (this.state.loading) {
+      sortBy = (
+        <option value="">Please Wait</option>
+      );
+    } else {
+      sortBy = this.state.sortBy.map((sort) => (
+        <option key={Math.random + sort}>{sort}</option>
+      ));
+    }
     return (
       <div>
         <div className="mySelect col s12">
-          <div className="col s12 m6 l7">
-            <h5> Showing News from {currentSource} </h5>
+          <div className="col s12 m12 l4">
+            <h5> {this.state.loading ? 'Loading' : 'Showing'} {this.state.loading !== '' ? `'${this.state.currentSort}'` : ''} News from {currentSource} </h5>
           </div>
-          <div className="col s12 m6 l5">
+          <div className="col s12 m6 l4">
             <select onChange={this.processClick}>
-              <option value="">Please Select a News Source</option>
+              <option value="bbc-news">Please Select a News Source</option>
               {Display}
+            </select>
+          </div>
+          <div className="col s12 m6 l4">
+            <select onChange={this.processSort}>
+              <option value="">Sort News</option>
+              {sortBy}
             </select>
           </div>
           <div className="clear" />

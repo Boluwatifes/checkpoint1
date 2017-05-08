@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "mocha test",
-    "start": "node_modules/.bin/webpack-dev-server --content-base src/public --inline"
+    "start": "webpack-dev-server --content-base src/public"
   },
   "repository": {
     "type": "git",
@@ -55,6 +55,7 @@
     "http-server": "^0.9.0",
     "jquery": "^3.2.1",
     "json-loader": "^0.5.4",
+    "lodash": "^4.17.4",
     "mocha": "^2.1.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
@@ -62,6 +63,7 @@
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
     "request": "^2.81.0",
+    "scrape-it": "^3.3.2",
     "webpack": "^*",
     "webpack-dev-server": "^2.4.5"
   }
