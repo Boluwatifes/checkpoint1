@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "mocha test",
-    "start": "webpack-dev-server --content-base src/public"
+    "build": "NODE_ENV=production webpack --config  --progress --colors",
+    "start": "node_modules/.bin/babel-node --presets react,es2015 server.js"
   },
   "repository": {
     "type": "git",
@@ -36,13 +37,18 @@
     "node-sass": "^4.5.2",
     "sass-loader": "^6.0.3",
     "style-loader": "^0.16.1",
-    "url-loader": "^0.5.8"
+    "url-loader": "^0.5.8",
+    "webpack-dev-middleware": "^1.10.2",
+    "webpack-hot-middleware": "^2.18.0"
   },
   "dependencies": {
     "axios": "^0.16.1",
+    "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
     "babel-eslint": "^7.2.3",
     "babel-loader": "^7.0.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-lodash": "^3.2.11",
     "babel-plugin-react-html-attrs": "^*",
     "babel-plugin-transform-class-properties": "^*",
     "babel-plugin-transform-decorators-legacy": "^*",
@@ -50,14 +56,18 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "chai": "^3.5.0",
+    "express": "^4.15.2",
     "extract-text-webpack-plugin": "^2.1.0",
     "flux": "^3.1.2",
+    "history": "^4.6.1",
     "http-server": "^0.9.0",
     "jquery": "^3.2.1",
     "json-loader": "^0.5.4",
     "lodash": "^4.17.4",
     "mocha": "^2.1.0",
+    "prop-types": "^15.5.8",
     "react": "^15.5.4",
+    "react-cookie": "^2.0.6",
     "react-dom": "^15.5.4",
     "react-google-login": "^2.8.9",
     "react-router": "^4.1.1",
