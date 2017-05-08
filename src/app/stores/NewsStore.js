@@ -7,6 +7,7 @@ class NewsStore extends EventEmitter {
     super();
     this.sources = [];
     this.articles = [];
+    this.sortBy = [];
     this.handleActions = this.handleActions.bind(this);
   }
 
@@ -15,16 +16,16 @@ class NewsStore extends EventEmitter {
     that.sources = source;
   }
 
-  querySource() {
-    return axios.get('https://newsapi.org/v1/sources?language=en').then(response => response.data.sources);
-  }
-
   getSources() {
     return this.sources;
   }
 
   getArticles() {
     return this.articles;
+  }
+
+  getSortBy() {
+    return this.sortBy;
   }
 
   handleActions(action) {
@@ -36,6 +37,11 @@ class NewsStore extends EventEmitter {
       }
       case 'FETCH_ARTICLES': {
         this.articles = action.articles;
+        this.emit('change');
+        break;
+      }
+      case 'GET_SORT': {
+        this.sortBy = action.sortBy;
         this.emit('change');
         break;
       }

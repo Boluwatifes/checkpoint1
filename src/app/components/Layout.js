@@ -20,9 +20,9 @@ export default class Layout extends React.Component {
         <Header />
         <div className="row home-div m-0">
           <Switch>
-            <Route exact path="/" component={localStorage.username ? Portal : Body} />
+            <Route exact path="/" component={localStorage.user ? Portal : Body} />
             <Route path="/login" component={Login} />
-            <Route path="/favorites" component={Favorites} />
+            <Route path="/favorites" component={localStorage.user ? Favorites : Body} />
             <Route component={NotFound} />
             <div className="clear" />
           </Switch>

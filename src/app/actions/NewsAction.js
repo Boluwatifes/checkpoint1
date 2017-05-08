@@ -1,8 +1,8 @@
 import dispatcher from '../dispatcher';
-import { apiAll, apiOne } from '../utils/api';
+import * as api from '../utils/api';
 
 export function getSources() {
-  apiAll((data) => {
+  api.apiAll((data) => {
     dispatcher.dispatch({
       type: 'GET_ALL_SOURCES',
       sources: data,
@@ -10,8 +10,8 @@ export function getSources() {
   });
 }
 
-export function getArticles(source) {
-  apiOne(source, (data) => {
+export function getArticles(source, sortBy) {
+  api.apiOne(source, sortBy, (data) => {
     dispatcher.dispatch({
       type: 'FETCH_ARTICLES',
       articles: data,
@@ -19,10 +19,12 @@ export function getArticles(source) {
   });
 }
 
-export function getSort(source) {
-  dispatcher.dispatch({
-    type: 'GET_SORT',
-    source,
+export function getSort(source, sortBy) {
+  api.apiSortBy(source, sortBy, (data) => {
+    dispatcher.dispatch({
+      type: 'GET_SORT',
+      sortBy: data,
+    });
   });
 }
 

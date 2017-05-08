@@ -15,9 +15,11 @@ export default class Body extends React.Component {
 
   responseGoogle(response) {
     const profile = response.getBasicProfile();
-    localStorage.username = profile.getName();
-    localStorage.email = profile.getEmail();
-    localStorage.image = profile.getImageUrl();
+    const user = {};
+    user.name = profile.getName();
+    user.email = profile.getEmail();
+    user.image = profile.getImageUrl();
+    localStorage.setItem('user', JSON.stringify(user));
     location.reload();
   }
 
