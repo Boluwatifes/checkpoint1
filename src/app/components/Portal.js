@@ -23,7 +23,7 @@ export default class Portal extends React.Component {
     this.processSort = this.processSort.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     newsStore.on('change', this.getSources);
     newsStore.on('change', this.getArticles);
   }
@@ -72,7 +72,7 @@ export default class Portal extends React.Component {
     });
   }
 
-  componentWillUnMount() {
+  componentDidUnMount() {
     newsStore.removeListener('change', this.getSources);
     newsStore.removeListener('change', this.getArticles);
   }
