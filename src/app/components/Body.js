@@ -1,18 +1,32 @@
+// import required dependencies
 import React from 'react';
 import GoogleLogin from 'react-google-login';
 
+/**
+ * Create a react component
+ * @class Body
+ */
+
 export default class Body extends React.Component {
+  /**
+   * Set user's state to either logged in or not logged in
+   * @constructor
+   */
+
   constructor() {
     super();
     this.state = {
       user: localStorage.getItem('user') ? localStorage.getItem('user') : 'Guest',
-      buttonText: localStorage.getItem('user') ? 'Go To Portal' : 'Get Started',
-      url: localStorage.getItem('user') ? '/portal' : '/login',
     };
     this.responseGoogle = this.responseGoogle.bind(this);
     this.errorGoogle = this.errorGoogle.bind(this);
   }
 
+  /**
+   * Handles login success callback
+   * @method responseGoogle
+   * @param {object} response - Object returned from google login
+   */
   responseGoogle(response) {
     const profile = response.getBasicProfile();
     const user = {};
@@ -23,9 +37,19 @@ export default class Body extends React.Component {
     location.reload();
   }
 
+  /**
+   * Handles login error callback
+   * @method errorGoogle
+   * @param {object} response - Object returned from google login
+   */
   errorGoogle(response) {
     console.log(response);
   }
+
+  /**
+   * Render react component
+   * @method render
+   */
 
   render() {
     return (

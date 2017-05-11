@@ -1,9 +1,18 @@
+// import required dependencies
 import _ from 'lodash';
 import React from 'react';
 import newsStore from '../stores/NewsStore';
 import * as NewsAction from '../actions/NewsAction';
 
+/**
+ * Create a react component
+ * @class Portal
+ */
 export default class Portal extends React.Component {
+  /**
+   * Set default sources to empty and default source to `bbc-news`
+   * @constructor
+   */
   constructor() {
     super();
     this.state = {
@@ -15,19 +24,31 @@ export default class Portal extends React.Component {
       loading: true,
       done: true,
     };
+
+    // call the getSources method in the NewsAction module and get all the news source
     NewsAction.getSources();
+
+    // call the getArticles method in the NewsAction module and get all
+    // articles from `bbc-news`
     NewsAction.getArticles('bbc-news', '');
+
+    // bind the methods to the Layout class
     this.getSources = this.getSources.bind(this);
     this.getArticles = this.getArticles.bind(this);
     this.processClick = this.processClick.bind(this);
     this.processSort = this.processSort.bind(this);
   }
 
+  // call class methods when the components is mounted
   componentDidMount() {
     newsStore.on('change', this.getSources);
     newsStore.on('change', this.getArticles);
   }
 
+  /**
+   * gets the news sources and set the state
+   * @method getSources
+   */
   getSources() {
     const rawSources = newsStore.getSources();
     const sortBy = _.filter(rawSources, ['id', 'bbc-news'])[0].sortBysAvailable;
@@ -39,6 +60,10 @@ export default class Portal extends React.Component {
     });
   }
 
+  /**
+   * gets the articles for a given source and set the state to reflect the articles
+   * @method getArticles
+   */
   getArticles() {
     const rawSources = newsStore.getSources();
     const sortBy = _.filter(rawSources, ['id', this.state.source])[0].sortBysAvailable;
@@ -51,6 +76,12 @@ export default class Portal extends React.Component {
     });
   }
 
+  /**
+   * Changes the news source when a news source is clicked, get articles for the
+   * news sources and update the state accordingly
+   * @method processClick
+   * @param e - Click event
+   */
   processClick(e) {
     NewsAction.getArticles(e.target.value, '');
     this.setState({
@@ -62,6 +93,12 @@ export default class Portal extends React.Component {
     });
   }
 
+  /**
+   * Changes the news source when a news source is clicked, get articles for the
+   * news sources and update the state accordingly
+   * @method processSort
+   * @param e - Click event
+   */
   processSort(e) {
     NewsAction.getArticles(this.state.source, e.target.value);
     this.setState({
@@ -72,28 +109,42 @@ export default class Portal extends React.Component {
     });
   }
 
+  // remove event listener from News Store when the component is unmounted
   componentDidUnMount() {
     newsStore.removeListener('change', this.getSources);
     newsStore.removeListener('change', this.getArticles);
   }
 
+  /**
+   * Render react component
+   * @method render
+   */
   render() {
+    // set default Display content to empty
     let Display = '';
+
+    // set default Articles content to empty
     let Articles = '';
+
+    // checks if the articles are mounted
     if (this.state.done) {
+      // sets Display to `please wait` if the news source have not been fetched
       Display = (
         <option value="">Please Wait .....</option>
       );
     } else {
+      // sets Display to the news sources if the sources have been fetched
       Display = this.state.sources.map(source => (
         <option value={source.id} key={source.id}>{source.name}</option>
       ));
     }
     if (this.state.loading) {
+      // set Articles to `Please wait` if it has not been fetched
       Articles = (
         <h2>Please Wait .....</h2>
       );
     } else {
+      // map the returned articles and set it to `Articles`
       Articles = this.state.articles.map(article => (
         <div key={article.title} className="col s12 m6 l4">
           <div className="card art">
@@ -113,8 +164,10 @@ export default class Portal extends React.Component {
       ));
     }
 
+    // format the current news source name
     const currentSource = this.state.source.replace('-', ' ').toUpperCase();
 
+    // get the sorting available for the current news source and map it to the select form element
     let sortBy = '';
     if (this.state.loading) {
       sortBy = (
@@ -125,6 +178,8 @@ export default class Portal extends React.Component {
         <option key={Math.random + sort}>{sort}</option>
       ));
     }
+
+    // renders the react component
     return (
       <div>
         <div className="mySelect col s12">

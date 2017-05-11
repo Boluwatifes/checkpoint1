@@ -1,7 +1,18 @@
+// import required dependencies
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+/**
+ * Create a react component
+ * @class NotLoggedIn
+ */
+
 class NotLoggedIn extends React.Component {
+  /**
+   * Render react component
+   * @method render
+   */
+
   render() {
     return (
       <header>
@@ -9,12 +20,8 @@ class NotLoggedIn extends React.Component {
           <div className="nav-wrapper">
             <Link className="brand-logo" to="/">Andela24</Link>
             <a href="#" data-activates="mobile-demo" className="button-collapse" id="nav"><i className="material-icons">menu</i></a>
-            <ul className="right hide-on-med-and-down">
-              <li><Link to="/login">Login</Link></li>
-            </ul>
-            <ul className="side-nav" id="mobile-demo">
-              <li><Link to="/login">Login</Link></li>
-            </ul>
+            <ul className="right hide-on-med-and-down" />
+            <ul className="side-nav" id="mobile-demo" />
             <div className="clear" />
           </div>
         </nav>
@@ -23,17 +30,38 @@ class NotLoggedIn extends React.Component {
   }
 }
 
+/**
+ * Create a react component
+ * @class LoggedIn
+ */
+
 class LoggedIn extends React.Component {
+  /**
+   * Set user's state to either logged in or not logged in
+   * @constructor
+   */
+
   constructor() {
     super();
     this.logMeOut = this.logMeOut.bind(this);
   }
+
+  /**
+   * Handles user logout
+   * @method logMeOut
+   * @param {object} e - Event passed in from the clicked button
+   */
 
   logMeOut(e) {
     e.preventDefault();
     localStorage.removeItem('user');
     location.reload();
   }
+
+  /**
+   * Render react component
+   * @method render
+   */
 
   render() {
     const user = JSON.parse(localStorage.user);
@@ -60,7 +88,17 @@ class LoggedIn extends React.Component {
   }
 }
 
+/**
+ * Create and export a react component
+ * @class Header
+ */
+
 export default class Header extends React.Component {
+  /**
+   * Render react component
+   * @method render
+   */
+
   render() {
     if (localStorage.getItem('user') !== null) {
       return (<LoggedIn />
