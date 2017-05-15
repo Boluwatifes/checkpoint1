@@ -9,5 +9,6 @@
 	    "browser": true,
 	    "node": true
 	},
-	"parser": "babel-eslint"
+	"parser": "babel-eslint",
+    "arrow-body-style": ["error", "always"]
 }
