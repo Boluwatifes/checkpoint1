@@ -1,6 +1,5 @@
 // import required dependencies
 import { EventEmitter } from 'events';
-import axios from 'axios';
 import dispatcher from '../dispatcher';
 
 /**

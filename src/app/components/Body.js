@@ -15,9 +15,6 @@ export default class Body extends React.Component {
 
   constructor() {
     super();
-    this.state = {
-      user: localStorage.getItem('user') ? localStorage.getItem('user') : 'Guest',
-    };
     this.responseGoogle = this.responseGoogle.bind(this);
     this.errorGoogle = this.errorGoogle.bind(this);
   }
@@ -53,7 +50,7 @@ export default class Body extends React.Component {
 
   render() {
     return (
-        <div className="col s12 home-inner">
+        <div className="col s12 home-inner" id="body">
           <div className="inner-content">
             <div id="index-banner" className="parallax-container">
               <div className="section no-pad-bot">

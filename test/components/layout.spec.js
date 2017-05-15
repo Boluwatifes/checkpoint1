@@ -1,12 +1,17 @@
+import 'jsdom-global/register';
 import React from 'react';
 import { expect } from 'chai';
 import {
   Route,
- Switch } from 'react-router-dom';
+ BrowserRouter as Router, Switch } from 'react-router-dom';
 import { shallow } from 'enzyme';
 import Header from '../../src/app/components/Header';
 import Layout from '../../src/app/components/Layout';
+import Body from '../../src/app/components/Body';
+import Portal from '../../src/app/components/Portal';
+import Favorites from '../../src/app/components/Favorites';
 
+global.localStorage = window.localStorage;
 describe('Test for <Layout /> components', () => {
   it('renders one <Header /> components', () => {
     const wrapper = shallow(<Layout />);
@@ -25,21 +30,36 @@ describe('Test for <Layout /> components', () => {
 
   it('contains one <Switch /> component', () => {
     const wrapper = shallow(<Layout />);
-    expect(wrapper.find(Switch)).to.have.length(1);
+    expect(wrapper.find(Router)).to.have.length(1);
   });
 
-  it('contains four <Route /> component', () => {
+  it('contains three <Route /> component', () => {
     const wrapper = shallow(<Layout />);
-    expect(wrapper.find(Route)).to.have.length(4);
+    expect(wrapper.find(Route)).to.have.length(3);
   });
 
-  it('simulates click events', () => {
-    const onButtonClick = sinon.spy();
-    const wrapper = shallow(
-      <Foo onButtonClick={onButtonClick} />
-    );
-    wrapper.find('button').simulate('click');
-    expect(onButtonClick).to.have.property('callCount', 1);
+  it('display `Body` component if the user is not logged in', () => {
+    localStorage.user = null;
+    const wrapper = shallow(<Layout />);
+    expect(wrapper.find(Switch).childAt(0).nodes[0].props.component).to.equal(Body);
   });
+
+  it('display `Portal` component if the user is logged in', () => {
+    localStorage.user = 'user';
+    const wrapper = shallow(<Layout />);
+    expect(wrapper.find(Switch).childAt(0).nodes[0].props.component).to.equal(Portal);
+  });
+
+  it('display `Favorite` component if the user is logged in', () => {
+    localStorage.user = 'user';
+    const wrapper = shallow(<Layout />);
+    expect(wrapper.find(Switch).childAt(1).nodes[0].props.component).to.equal(Favorites);
+  });
+
+  it('display a div with text when user navigates to an alien page', () => {
+    const wrapper = shallow(<Layout />);
+    expect(wrapper.instance().NotFound().type).to.eql('div');
+  });
+
 });
 

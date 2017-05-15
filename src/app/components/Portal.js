@@ -25,13 +25,6 @@ export default class Portal extends React.Component {
       done: true,
     };
 
-    // call the getSources method in the NewsAction module and get all the news source
-    NewsAction.getSources();
-
-    // call the getArticles method in the NewsAction module and get all
-    // articles from `bbc-news`
-    NewsAction.getArticles('bbc-news', '');
-
     // bind the methods to the Layout class
     this.getSources = this.getSources.bind(this);
     this.getArticles = this.getArticles.bind(this);
@@ -39,8 +32,13 @@ export default class Portal extends React.Component {
     this.processSort = this.processSort.bind(this);
   }
 
-  // call class methods when the components is mounted
-  componentDidMount() {
+  // call class methods when the components are mounted
+  componentWillMount() {
+    // call the getSources method in the NewsAction module and get all the news source
+    NewsAction.getSources();
+    // call the getArticles method in the NewsAction module and get all
+    // articles from `bbc-news`
+    NewsAction.getArticles('bbc-news', '');
     newsStore.on('change', this.getSources);
     newsStore.on('change', this.getArticles);
   }
@@ -51,13 +49,13 @@ export default class Portal extends React.Component {
    */
   getSources() {
     const rawSources = newsStore.getSources();
-    const sortBy = _.filter(rawSources, ['id', 'bbc-news'])[0].sortBysAvailable;
-    this.setState({
-      sources: rawSources,
-      sortBy,
-      done: false,
-      sorting: false,
-    });
+    if (rawSources) {
+      this.setState({
+        sources: rawSources,
+        done: false,
+        sorting: false,
+      });
+    }
   }
 
   /**
@@ -66,14 +64,20 @@ export default class Portal extends React.Component {
    */
   getArticles() {
     const rawSources = newsStore.getSources();
-    const sortBy = _.filter(rawSources, ['id', this.state.source])[0].sortBysAvailable;
-    this.setState({
-      articles: newsStore.getArticles().articles,
-      currentSort: newsStore.getArticles().sortBy,
-      sortBy,
-      loading: false,
-      sorting: false,
-    });
+    if (rawSources) {
+      const articles = newsStore.getArticles().articles;
+      const currentSort = newsStore.getArticles().sortBy;
+      if (articles) {
+        const sortBy = _.filter(rawSources, ['id', this.state.source])[0].sortBysAvailable;
+        this.setState({
+          articles,
+          currentSort,
+          sortBy,
+          loading: false,
+          sorting: false,
+        });
+      }
+    }
   }
 
   /**
@@ -110,7 +114,7 @@ export default class Portal extends React.Component {
   }
 
   // remove event listener from News Store when the component is unmounted
-  componentDidUnMount() {
+  componentWillUnMount() {
     newsStore.removeListener('change', this.getSources);
     newsStore.removeListener('change', this.getArticles);
   }
@@ -125,6 +129,9 @@ export default class Portal extends React.Component {
 
     // set default Articles content to empty
     let Articles = '';
+
+    // set default sort
+    let sortBy = '';
 
     // checks if the articles are mounted
     if (this.state.done) {
@@ -142,6 +149,10 @@ export default class Portal extends React.Component {
       // set Articles to `Please wait` if it has not been fetched
       Articles = (
         <h2>Please Wait .....</h2>
+      );
+
+      sortBy = (
+        <option value="">Please Wait</option>
       );
     } else {
       // map the returned articles and set it to `Articles`
@@ -162,26 +173,19 @@ export default class Portal extends React.Component {
           </div>
         </div>
       ));
-    }
 
-    // format the current news source name
-    const currentSource = this.state.source.replace('-', ' ').toUpperCase();
-
-    // get the sorting available for the current news source and map it to the select form element
-    let sortBy = '';
-    if (this.state.loading) {
-      sortBy = (
-        <option value="">Please Wait</option>
-      );
-    } else {
+      // map the returned sortBy and sest it to SortBy
       sortBy = this.state.sortBy.map((sort) => (
         <option key={Math.random + sort}>{sort}</option>
       ));
     }
 
+    // format the current news source name
+    const currentSource = this.state.source.replace('-', ' ').toUpperCase();
+
     // renders the react component
     return (
-      <div>
+      <div className="portal">
         <div className="mySelect col s12">
           <div className="col s12 m12 l4">
             <h5> {this.state.loading ? 'Loading' : 'Showing'} {this.state.loading !== '' ? `'${this.state.currentSort}'` : ''} News from {currentSource} </h5>
