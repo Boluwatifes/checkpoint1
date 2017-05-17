@@ -12,6 +12,10 @@ html, body {
   font-family: Lato,Helvetica,Arial,sans-serif;
 }
 
+.h-500 {
+  min-height: 500px !important;
+}
+
 .avatar-img{
   height: 50px;
   width: 50px;
@@ -42,6 +46,9 @@ html, body {
 #app{
   margin:0;
   padding:0;
+}
+.m-auto {
+  margin: 0 auto;
 }
 
 nav{
@@ -75,4 +82,14 @@ nav{
     display: block;
 
   }
+}
+
+.portal {
+  width: $myWidth;
+}
+
+.footer {
+  padding: $myPadding / 2;
+  background-color: rgb(0, 0, 0);
+  color: #fff;
 }

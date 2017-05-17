@@ -10,5 +10,10 @@
 	    "node": true
 	},
 	"parser": "babel-eslint",
-    "arrow-body-style": ["error", "always"]
+    "arrow-body-style": ["error", "always"],
+    "rules": {
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "class-methods-use-this": ["error", { "exceptMethods": ["responseGoogle", "errorGoogle", 
+        "logMeOut", "componentWillMount", "componentWillUnmount", "render"] }]
+    }
 }

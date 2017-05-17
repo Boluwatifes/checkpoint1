@@ -2,18 +2,10 @@
 import React from 'react';
 
 /**
- * Create a react component
- * @class Favorites
+ * Render react component
+ * @method render
  */
 
-export default class Favorites extends React.Component {
+const Favorites = () => <h2>My Favorites </h2>;
 
-  /**
-   * Render react component
-   * @method render
-   */
-
-  render() {
-    return <h2>My Favorites </h2>;
-  }
-}
+export default Favorites;

@@ -14,14 +14,13 @@ describe('Test for <Portal /> component', () => {
 
   it('should return a default state when called', () => {
     const wrapper = mount(<Portal />);
+    const source = localStorage.defaultNews ? localStorage.defaultNews : 'bbc-news';
     const state = {
-      sources: [],
-      source: 'bbc-news',
-      articles: [],
-      sortBy: [],
+      source,
+      articles: null,
       currentSort: '',
       loading: true,
-      done: true,
+      sortBy: ['top'],
     };
     expect(wrapper.nodes[0].state).to.eql(state);
   });
@@ -30,11 +29,6 @@ describe('Test for <Portal /> component', () => {
     sinon.spy(Portal.prototype, 'componentWillMount');
     const wrapper = mount(<Portal />);
     expect(Portal.prototype.componentWillMount.calledOnce).to.equal(true);
-  });
-
-  it('contains a getSource method', () => {
-    const wrapper = shallow(<Portal />);
-    expect(wrapper.instance().getSources()).to.be.defined;
   });
 
   it('contains a getArticles method', () => {
@@ -50,11 +44,6 @@ describe('Test for <Portal /> component', () => {
   it('contains a processSort method', () => {
     const wrapper = shallow(<Portal />);
     expect(wrapper.instance().processSort).to.be.defined;
-  });
-
-  it('calls componentWillUnMount', () => {
-    const wrapper = mount(<Portal />);
-    expect(wrapper.instance().componentWillUnMount()).to.be.defined;
   });
 
    it('contains a render method', () => {

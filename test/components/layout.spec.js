@@ -58,8 +58,7 @@ describe('Test for <Layout /> components', () => {
 
   it('display a div with text when user navigates to an alien page', () => {
     const wrapper = shallow(<Layout />);
-    expect(wrapper.instance().NotFound().type).to.eql('div');
+    expect(wrapper.node.props.children.props.children[1].props.children.props.children[2].props.component).to.be.function;
   });
-
 });
 
