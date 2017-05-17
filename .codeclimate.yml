@@ -1,8 +1,2 @@
 exclude_paths:
-- "tests/"
-- "public/"
-- ".vscode"
-- "coverage"
-- "node_modules"
-- "scratch"
-- ".vscode"
+- "src/public/**/"
