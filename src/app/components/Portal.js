@@ -107,8 +107,8 @@ export default class Portal extends React.Component {
       <div className="portal">
         <div className="mySelect col s12">
           <div className="col s12 m12 l4">
-            <h5> {this.state.currentSort.toUpperCase()} News From
-            {this.state.source.toUpperCase()} </h5>
+            <h5> {this.state.currentSort.toUpperCase()} News From {this.state
+              .source.toUpperCase()} </h5>
           </div>
           <div className="col s12 m6 l4">
             <Sources sources={this.state.sources} processClick={this.processClick} />
