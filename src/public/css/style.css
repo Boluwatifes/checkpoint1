@@ -6687,6 +6687,9 @@ html, body {
   margin: 0;
   font-family: Lato,Helvetica,Arial,sans-serif; }
 
+.h-500 {
+  min-height: 500px !important; }
+
 .avatar-img {
   height: 50px;
   width: 50px;
@@ -6714,6 +6717,9 @@ html, body {
   margin: 0;
   padding: 0; }
 
+.m-auto {
+  margin: 0 auto; }
+
 nav {
   background-color: #5cc7b2; }
 
@@ -6735,5 +6741,13 @@ nav {
   margin: 20px 0px; }
   .mySelect select {
     display: block; }
+
+.portal {
+  width: 100%; }
+
+.footer {
+  padding: 20px;
+  background-color: black;
+  color: #fff; }
 
 /*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiIuLi9jc3Mvc3R5bGUuY3NzIiwic291cmNlUm9vdCI6IiJ9*/

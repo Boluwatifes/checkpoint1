@@ -4,7 +4,7 @@
   "description": "Andela24 brings news from over 70 different news sources together on a single plartform",
   "main": "server.js",
   "scripts": {
-    "test": "nyc --reporter=html --reporter=text mocha -r mock-local-storage --compilers js:babel-register --colors ./test/**/*.spec.js",
+    "test": "nyc --reporter=html --reporter=text mocha -r mock-local-storage --compilers js:babel-register --colors --report lcovonly -- ./test/**/*.spec.js && codecov --token=2f4bcce5-91f5-43ac-b1d9-cbed53ce36dd",
     "test:watch": "npm test -- --watch",
     "build": "NODE_ENV=production webpack --config  --progress --colors",
     "start": "node src/app/server.js",
@@ -27,8 +27,6 @@
   "homepage": "https://github.com/Boluwatifes/andela24#readme",
   "devDependencies": {
     "babel-register": "^6.24.1",
-    "codecov": "^1.0.0",
-    "coveralls": "^2.13.1",
     "css-loader": "^0.28.0",
     "enzyme": "^2.8.2",
     "eslint": "^3.19.0",
@@ -69,6 +67,8 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "chai": "^3.5.0",
+    "codecov": "^1.0.0",
+    "coveralls": "^2.13.1",
     "enzyme": "^2.8.2",
     "express": "^4.15.2",
     "extract-text-webpack-plugin": "^2.1.0",

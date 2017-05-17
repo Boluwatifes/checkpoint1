@@ -10,7 +10,7 @@ import * as api from '../utils/api';
  * dispatch action to the store
  */
 
-export function getSources() {
+export function getAllSources() {
   api.apiAll((data) => {
     dispatcher.dispatch({
       type: 'GET_ALL_SOURCES',
@@ -35,3 +35,4 @@ export function getArticles(source, sortBy) {
     });
   });
 }
+

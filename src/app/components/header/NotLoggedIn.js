@@ -1,14 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default class NotLoggedIn extends React.Component {
-  render() {
-    return (
+const NotLoggedIn = () =>
+  (
     <header id="notLoggedIn">
       <nav className="h-auto p-10">
         <div className="nav-wrapper">
           <Link className="brand-logo" to="/">Andela24</Link>
-          <a href="#" data-activates="mobile-demo" className="button-collapse" id="nav"><i className="material-icons">menu</i></a>
+          <a href="!#" data-activates="mobile-demo" className="button-collapse" id="nav"><i className="material-icons">menu</i></a>
           <ul className="right hide-on-med-and-down">
             <li><Link to="#">Login</Link></li>
           </ul>
@@ -17,6 +16,6 @@ export default class NotLoggedIn extends React.Component {
         </div>
       </nav>
     </header>
-    );
-  }
-}
+  );
+
+export default NotLoggedIn;
