@@ -4,4 +4,4 @@ Python: false
 PHP: false
 
 exclude_paths:
-- src/public/**/*
+- src/public/**
