@@ -22,7 +22,7 @@ export default class Article extends React.Component {
   }
 
   render() {
-    const excerpt = title => (title.length > 80 ? `${title.substring(0, 80)} ...` : title);
+    const excerpt = title => (title.length > 80 ? `${title.substring(0, 50)} ...` : title);
 
     let allArticles;
 
@@ -49,6 +49,9 @@ export default class Article extends React.Component {
             <div className="card-reveal">
               <span className="card-title grey-text text-darken-4">{article.title}<i className="material-icons right">close</i></span>
               <p>{article.description}</p>
+            </div>
+            <div className="card-action">
+              <span><i className="material-icons">share</i></span>
             </div>
           </div>
         </div>
