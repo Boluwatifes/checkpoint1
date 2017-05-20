@@ -5,7 +5,6 @@ import ReactDom from 'react-dom';
 import Firebase from 'firebase';
 import Layout from './components/Layout';
 import '../public/assets/sass/styles.scss';
-import '../../node_modules/materialize-css/js/materialize';
 
 const app = document.getElementById('app');
  // Firebase Configuration
