@@ -20,7 +20,7 @@ export default class ShowArticles extends React.Component {
   constructor() {
     super();
     NewsAction.getAllSources();
-    this.source = localStorage.defaultNews ? localStorage.defaultNews : 'bbc-news';
+    this.source = localStorage.defaultNews ? localStorage.defaultNews : '';
     this.state = {
       source: this.source,
       articles: {},
@@ -42,7 +42,9 @@ export default class ShowArticles extends React.Component {
    * @returns {function} - calls news action and dispatch an action
    */
   componentWillMount() {
-    NewsAction.getArticles(this.state.source, '');
+    if (this.state.source !== '') {
+      NewsAction.getArticles(this.state.source, '');
+    }
   }
 
   /**
