@@ -98,6 +98,7 @@
     "react-select": "^1.0.0-rc.4",
     "react-select-search": "^0.5.5",
     "react-selectize": "^2.1.0",
+    "sweetalert2": "^6.6.3",
     "webpack": "^*",
     "webpack-dev-server": "^2.4.5"
   }

@@ -1,8 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import swal from 'sweetalert2';
 import { saveFavoritesToDatabase } from '../utils/newsApiMethods';
-import { excerpt, cleanSource, testScrape } from '../utils/helpers';
+import { excerpt, cleanSource } from '../utils/helpers';
 
+
+$('body').on('click', '#addFav', () => {
+  swal({
+    title: 'Success!',
+    text: 'The article has been added to your favorite',
+    type: 'success',
+  });
+});
+
+$('body').on('click', '#deleteFav', () => {
+  swal({
+    title: 'Success!',
+    text: 'The article has been removed from your favorite',
+    type: 'success',
+  });
+});
 /**
  * Create a react component
  * @class Article
@@ -63,6 +80,8 @@ export default class Article extends React.Component {
     saveFavoritesToDatabase(articleToSave, userId, source);
   }
 
+
+
   /**
    * Render react component
    * @method render
@@ -94,7 +113,7 @@ export default class Article extends React.Component {
       );
       const favoriteButton = i => (
         <i
-          id="favorites"
+          id="addFav"
           onClick={this.saveUsersFavorites.bind(this, i)}
           className="material-icons"
         >
@@ -103,7 +122,7 @@ export default class Article extends React.Component {
       );
       const deleteButton = key => (
         <i
-          id="deleleFav"
+          id="deleteFav"
           onClick={this.deleteFavorite.bind(this, key)}
           className="material-icons"
         >
@@ -124,7 +143,7 @@ export default class Article extends React.Component {
               <span className="card-title activator grey-text text-darken-4" id="title">
                 {excerpt(article.title)}<i className="material-icons right">more_vert</i>
               </span>
-              <p><a id="not" href={article.url} target="blank">Read More</a></p>
+              <p><a href={article.url} target="blank">Read More</a></p>
             </div>
             <div className="card-reveal">
               <span className="card-title grey-text text-darken-4">
