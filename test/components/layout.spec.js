@@ -7,8 +7,8 @@ import {
 import { shallow } from 'enzyme';
 import Header from '../../src/app/components/Header';
 import Layout from '../../src/app/components/Layout';
-import Body from '../../src/app/components/Body';
-import Portal from '../../src/app/components/Portal';
+import Body from '../../src/app/components/Home';
+import Portal from '../../src/app/components/ShowArticles';
 import Favorites from '../../src/app/components/Favorites';
 
 global.localStorage = window.localStorage;

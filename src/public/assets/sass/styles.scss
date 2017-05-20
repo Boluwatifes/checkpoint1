@@ -1,5 +1,6 @@
 @import "../materialize/sass/materialize";
 @import url('https://fonts.googleapis.com/css?family=Lato|Poiret+One|Raleway');
+@import '../../../../node_modules/react-selectize/themes/index.css';
 
 $myWidth: 100%;
 $myHeight: 100%;
@@ -20,6 +21,11 @@ html, body {
   height: 50px;
   width: 50px;
   border-radius: 50%;
+  background-color: #fff;
+  color: #000;
+  font-size: 40px;
+  line-height: 50px;
+  text-align: center;
 }
 .art{
   min-height: 400px !important;
@@ -62,7 +68,7 @@ nav{
 
   .home-inner {
     @extend .valign-wrapper;
-    min-height: 87vh;
+    min-height: 75vh;
     box-sizing: border-box;
     background-color: #fff;
     padding: $myPadding;
@@ -86,6 +92,19 @@ nav{
 
 .portal {
   width: $myWidth;
+}
+
+.favorite {
+  color: red;
+  cursor: pointer;
+}
+
+.favorite:hover{
+  opacity: 0.5;
+}
+
+#articles{
+  min-height: 75vh;
 }
 
 .footer {

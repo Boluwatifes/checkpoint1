@@ -1,31 +1,75 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { saveFavoritesToDatabase } from '../utils/newsApiMethods';
+import { excerpt, cleanSource, testScrape } from '../utils/helpers';
 
+/**
+ * Create a react component
+ * @class Article
+ */
 export default class Article extends React.Component {
+  /**
+   * Create a constructor
+   * @constructor
+   * @param {object} props
+   */
   constructor(props) {
     super(props);
     this.state = {
-      articles: {},
+      articles: [],
       loading: true,
     };
     this.setArticles = this.setArticles.bind(this);
+    this.saveUsersFavorites = this.saveUsersFavorites.bind(this);
   }
 
+  /**
+   * Set state when a new prop is received
+   * @method componentWilReceiveProps
+   * @param {object} nextProps - New props
+   * @return {state} - Set states
+   */
   componentWillReceiveProps(nextProps) {
     this.setArticles(nextProps.articles);
   }
 
+  /**
+   * gets the news sources and set the state
+   * @method setArticles
+   * @param {object} articles
+   * @return {state} - Set the sources to the state
+   */
   setArticles(articles) {
     this.setState({
       articles,
       loading: false,
     });
+    this.deleteFavorite = this.props.deleteFavorite;
+    localStorage.setItem('articles', JSON.stringify(articles));
   }
 
+   /**
+   * Saves users favorites to firebase database
+   * @method savesUsersFavorites
+   * @param {int} articleIndex
+   * @return {object} data
+   * @memberof ShowArticles
+   */
+  saveUsersFavorites(articleIndex) {
+    const articles = JSON.parse(localStorage.articles);
+    const articleToSave = articles[articleIndex];
+    const userId = JSON.parse(localStorage.user).id;
+    const source = localStorage.defaultNews;
+    saveFavoritesToDatabase(articleToSave, userId, source);
+  }
+
+  /**
+   * Render react component
+   * @method render
+   * @return {function} react-component
+   */
   render() {
-    const excerpt = title => (title.length > 80 ? `${title.substring(0, 50)} ...` : title);
-
     let allArticles;
-
     if (this.state.loading) {
       allArticles = (
         <div className="col s12 home-inner" >
@@ -35,23 +79,62 @@ export default class Article extends React.Component {
           </div>
         </div>
       );
+    } else if ((this.state.articles).length === 0) {
+      allArticles = (
+        <div className="col s12 home-inner" >
+          <div className="inner-content center m-auto">
+            <span className="center"><img alt="Not Available" src="imgs/na.png" /></span>
+            <p className="center">No Favorites to show yet. Click the <span style={{ color: 'red' }}><i id="favorites" className="material-icons">favorite</i></span> button to add. </p>
+          </div>
+        </div>
+      );
     } else {
-      allArticles = this.state.articles.map(article => (
+      const newsSource = source => (
+        <span className="card-title">{cleanSource(source)}</span>
+      );
+      const favoriteButton = i => (
+        <i
+          id="favorites"
+          onClick={this.saveUsersFavorites.bind(this, i)}
+          className="material-icons"
+        >
+            favorite
+        </i>
+      );
+      const deleteButton = key => (
+        <i
+          id="deleleFav"
+          onClick={this.deleteFavorite.bind(this, key)}
+          className="material-icons"
+        >
+            delete_forever
+        </i>
+      );
+      allArticles = this.state.articles.map((article, i) => (
         <div className="col s12 m6 l4 h-500" id="article" key={Math.random + article.title}>
           <div className="card art">
             <div className="card-image waves-effect waves-block waves-light">
-              <img className="activator responsive-img" src={article.urlToImage} alt={article.title} />
+              <img
+                className="activator responsive-img"
+                src={article.urlToImage} alt={article.title}
+              />
+              {this.props.type === 'favorite' ? newsSource(article.source) : ''}
             </div>
             <div className="card-content">
-              <span className="card-title activator grey-text text-darken-4" id="title">{excerpt(article.title)}<i className="material-icons right">more_vert</i></span>
-              <p><a href={article.url} target="blank">Read More</a></p>
+              <span className="card-title activator grey-text text-darken-4" id="title">
+                {excerpt(article.title)}<i className="material-icons right">more_vert</i>
+              </span>
+              <p><a id="not" href={article.url} target="blank">Read More</a></p>
             </div>
             <div className="card-reveal">
-              <span className="card-title grey-text text-darken-4">{article.title}<i className="material-icons right">close</i></span>
+              <span className="card-title grey-text text-darken-4">
+                {article.title}<i className="material-icons right">close</i>
+              </span>
               <p>{article.description}</p>
             </div>
             <div className="card-action">
               <span><i className="material-icons">share</i></span>
+              <span className="favorite">{this.props.type === 'favorite' ? deleteButton(article.title) : favoriteButton(i)}</span>
             </div>
           </div>
         </div>
@@ -66,3 +149,7 @@ export default class Article extends React.Component {
     );
   }
 }
+
+Article.propTypes = {
+  articles: PropTypes.any,
+};

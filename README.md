@@ -6,7 +6,7 @@
 [![Build Status](https://travis-ci.org/Boluwatifes/andela24.svg?branch=master)](https://travis-ci.org/Boluwatifes/andela24)
 
 ## Introduction
-*  **`Andela24`** is a React Powered News Feed App.
+*  **`NewsNinja`** is a React Powered News Feed App.
 *  It has the following features;
   *  Login via Google
   *  Allows users to select news sources
@@ -17,7 +17,7 @@
     *  Popular
   *  Allows users to save favorite news 
   *  Allows users to share interesting news on social media
-*  A demo of the app can be access on heroku via [here](https://andela24.herokuapp.com)
+*  A demo of the app can be access on heroku via [here](https://newsninja.herokuapp.com)
 
 ## Dependencies
 
@@ -69,14 +69,14 @@
 *  Clone this repository on that directory.
   *  Using SSH;
 
-    >`git clone git@github.com:Boluwatifes/andela24.git`
+    >`git clone git@github.com:andela-dbamidele/checkpoint1.git`
 
   *  Using HTTP;
 
-    >`git clone https://github.com/Boluwatifes/andela24.git`
+    >`git clone https://github.com/andela-dbamidele/checkpoint1.git`
 
 *  Navigate to the repo's folder on your computer
-  *  `cd andela24/`
+  *  `cd checkpoint1/`
 *  Install the app's dependencied
   *  `npm install`
 * Run the app
