@@ -1,8 +1,19 @@
+import { SimpleSelect } from 'react-selectize';
 import React from 'react';
+import PropTypes from 'prop-types';
 import SourceStore from '../stores/SourceStore';
 import * as NewsAction from '../actions/NewsAction';
 
+/**
+ * Create a react component
+ * @class Sources
+ */
 export default class Sources extends React.Component {
+  /**
+   * Create a constructor
+   * @constructor
+   * @param {object} props
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -12,15 +23,29 @@ export default class Sources extends React.Component {
     this.getSources = this.getSources.bind(this);
   }
 
+  /**
+   * Calls NewsAction when the component is about to mount
+   * @method componentWilMount
+   * @returns {function} - calls news action and dispatch an action
+   */
   componentWillMount() {
     NewsAction.getAllSources();
   }
 
+  /**
+   * Add event Listener to the Sources Store and fires when the component is fully mounted
+   * @method componentDidMount
+   * @returns {event} - register event
+   */
   componentDidMount() {
-    const source = localStorage.defaultNews ? localStorage.defaultNews : 'bbc-news';
     SourceStore.on('change', this.getSources);
   }
 
+  /**
+   * Remove event listener from the Sources store
+   * @method componentWilUnMount
+   * @return {event} - removes event
+   */
   componentWillUnmount() {
     SourceStore.removeListener('change', this.getSources);
   }
@@ -28,6 +53,7 @@ export default class Sources extends React.Component {
   /**
    * gets the news sources and set the state
    * @method getSources
+   * @return {state} - Set sources to the state
    */
   getSources() {
     const rawSources = SourceStore.getSources();
@@ -39,23 +65,33 @@ export default class Sources extends React.Component {
     }
   }
 
+  /**
+   * Render react component
+   * @method render
+   * @return {function} react-component
+   */
   render() {
-    const processClick = this.props.processClick;
+    const handlesSourceChange = this.props.handlesSourceChange;
     let AllSources;
+    // set sources to loading if the `this.state.loading` is true
     if (this.state.loading) {
       AllSources = (
         <option> Loading.... </option>
       );
     } else {
+      // map the sources to `AllSources`
       AllSources = this.state.sources.map(source => (
         <option key={Math.random + source.name} value={source.id}>{source.name}</option>
       ));
     }
     return (
-      <select name="sources" onChange={processClick}>
-        <option value=""> Select News Source </option>
-        { AllSources }
-      </select>
+      <SimpleSelect placeholder="Search for news source" onValueChange={handlesSourceChange}>
+        {AllSources}
+      </SimpleSelect>
     );
   }
 }
+
+Sources.propTypes = {
+  handlesSourceChange: PropTypes.func,
+};

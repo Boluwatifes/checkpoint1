@@ -4,9 +4,9 @@ import {
  Switch, BrowserRouter as Router } from 'react-router-dom';
 import React from 'react';
 import Header from './Header';
-import Body from './Body';
+import Home from './Home';
 import Favorites from './Favorites';
-import Portal from './Portal';
+import ShowArticles from './ShowArticles';
 import Footer from './Footer';
 import NotFound from './NotFound';
 
@@ -21,8 +21,8 @@ const Layout = () => (
       <Header />
       <div className="row home-div m-0">
         <Switch>
-          <Route exact path="/" component={localStorage.user ? Portal : Body} />
-          <Route path="/favorites" component={localStorage.user ? Favorites : NotFound} />
+          <Route exact path="/" component={localStorage.user ? ShowArticles : Home} />
+          <Route path="/favorites" component={localStorage.user ? Favorites : Home} />
           <Route component={NotFound} />
           <div className="clear" />
         </Switch>

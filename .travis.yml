@@ -7,5 +7,5 @@ script:
   - npm test
 addons:
     code_climate:
-        repo_token: d67c1c74c35d55429a5ef6dd674c7de8939f294c6cb9eda701ef2c5f9a9ec5c7
+        repo_token: 3d93025a8d5206336b3ce207227e67166871f65327b9926a23ccc6d662b824b5
 after_success: npm run coverage
