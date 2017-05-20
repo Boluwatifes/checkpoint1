@@ -85,7 +85,7 @@ export default class Sources extends React.Component {
       ));
     }
     return (
-      <SimpleSelect placeholder="Search for news source" onValueChange={handlesSourceChange}>
+      <SimpleSelect placeholder="Change News Source" onValueChange={handlesSourceChange}>
         {AllSources}
       </SimpleSelect>
     );

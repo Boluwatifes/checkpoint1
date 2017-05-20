@@ -16,6 +16,7 @@ export default class LoggedIn extends React.Component {
   handleLogOut(e) {
     e.preventDefault();
     localStorage.removeItem('user');
+    localStorage.removeItem('defaultNews');
     location.reload();
   }
 
@@ -38,7 +39,8 @@ export default class LoggedIn extends React.Component {
               <li><Link to="/logout" onClick={this.handleLogOut}>Logout</Link></li>
             </ul>
             <ul className="side-nav" id="mobile-demo">
-              <li><Link to="/favorites">Favorites</Link></li>
+              <li><Link to="/favorites">Favourites</Link></li>
+              <li><img className="avatar-img" src={user.image} alt="User Avatar" /></li>
               <li><Link to="/logout" onClick={this.handleLogOut}>Logout</Link></li>
             </ul>
             <div className="clear" />

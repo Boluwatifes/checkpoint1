@@ -53,3 +53,8 @@ export function testScrape() {
   //   }
   // });
 }
+
+export function getFirstName(string) {
+  const newString = string.split(' ')[1];
+  return `${newString.charAt(0).toUpperCase()}${newString.slice(1)}`;
+}
