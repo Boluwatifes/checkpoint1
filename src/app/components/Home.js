@@ -73,7 +73,7 @@ export default class Body extends React.Component {
                     style={{ opacity: 1 }}
                   >
                     <span className="waves-effect waves-light btn-large">
-                      <i className="fa fa-google" />
+                      <i className="fa fa-google" />&nbsp;
                         Login With Google
                       </span>
                   </GoogleLogin>

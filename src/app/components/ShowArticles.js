@@ -1,12 +1,12 @@
 // import required dependencies
 import React from 'react';
-import $ from 'jquery';
 import { cleanSource } from '../utils/helpers';
 import ArticlesStore from '../stores/ArticlesStore';
 import * as NewsAction from '../actions/NewsAction';
 import Articles from './Articles';
 import Sources from './Sources';
 import SortBy from './SortBy';
+import SelectDefaultSource from './SelectDefaultSource';
 
 /**
  * Create a react component
@@ -19,6 +19,7 @@ export default class ShowArticles extends React.Component {
    */
   constructor() {
     super();
+    NewsAction.getAllSources();
     this.source = localStorage.defaultNews ? localStorage.defaultNews : 'bbc-news';
     this.state = {
       source: this.source,
@@ -128,8 +129,8 @@ export default class ShowArticles extends React.Component {
    * @return {function} react-component
    */
   render() {
-    return (
-      <div className="portal">
+    const DisplayForReturningUser = (
+      <div>
         <div className="mySelect col s12">
           <div className="col s12 m12 l4">
             <h5>
@@ -153,7 +154,16 @@ export default class ShowArticles extends React.Component {
         <Articles articles={this.state.articles} />
         <div className="clear" />
       </div>
+    );
 
+    const DislayForNewUser = (
+      <SelectDefaultSource />
+    );
+    const defaultNews = localStorage.defaultNews;
+    return (
+      <div className="portal">
+        {defaultNews ? DisplayForReturningUser : DislayForNewUser}
+      </div>
     );
   }
 }
