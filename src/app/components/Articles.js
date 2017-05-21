@@ -91,7 +91,7 @@ export default class Article extends React.Component {
     let allArticles;
     if (this.state.loading) {
       allArticles = (
-        <div className="col s12 home-inner" >
+        <div className="col s12 home-inner-white">
           <div className="inner-content center m-auto">
             <span className="center"><img alt="loading" src="imgs/loading.gif" /></span>
             <p className="center">Please Wait .....</p>
@@ -116,6 +116,7 @@ export default class Article extends React.Component {
           id="addFav"
           onClick={this.saveUsersFavorites.bind(this, i)}
           className="material-icons"
+          title="Add to Favorite"
         >
             favorite
         </i>
@@ -125,6 +126,7 @@ export default class Article extends React.Component {
           id="deleteFav"
           onClick={this.deleteFavorite.bind(this, key)}
           className="material-icons"
+          title="Delete from Favorite"
         >
             delete_forever
         </i>
@@ -143,7 +145,7 @@ export default class Article extends React.Component {
               <span className="card-title activator grey-text text-darken-4" id="title">
                 {excerpt(article.title)}<i className="material-icons right">more_vert</i>
               </span>
-              <p><a href={article.url} target="blank">Read More</a></p>
+              <p><a href={`/article?url=${article.url}`}>Read More</a></p>
             </div>
             <div className="card-reveal">
               <span className="card-title grey-text text-darken-4">
@@ -152,7 +154,6 @@ export default class Article extends React.Component {
               <p>{article.description}</p>
             </div>
             <div className="card-action">
-              <span><i className="material-icons">share</i></span>
               <span className="favorite">{this.props.type === 'favorite' ? deleteButton(article.title) : favoriteButton(i)}</span>
             </div>
           </div>

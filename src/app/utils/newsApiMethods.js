@@ -82,3 +82,13 @@ export const deleteFavoriteFromDatabase = (title, userId) => {
   });
 };
 
+export const scrapeArticle = (url, callback) => {
+  axios.get(`https://document-parser-api.lateral.io/?url=${url}&subscription-key=b296f0a1bd55773dde9b5feaee0f6cf1`, {
+    responseType: 'json',
+  }).then((data) => {
+    callback(data.data);
+  }).catch((error) => {
+    callback('error');
+  });
+};
+
