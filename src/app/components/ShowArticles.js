@@ -132,7 +132,7 @@ export default class ShowArticles extends React.Component {
    */
   render() {
     const DisplayForReturningUser = (
-      <div>
+      <div className="background">
         <div className="mySelect col s12">
           <div className="col s12 m12 l4">
             <h5>
@@ -165,6 +165,7 @@ export default class ShowArticles extends React.Component {
     return (
       <div className="portal">
         {defaultNews ? DisplayForReturningUser : DislayForNewUser}
+        <div className="clear" />
       </div>
     );
   }

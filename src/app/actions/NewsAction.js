@@ -3,7 +3,8 @@ import dispatcher from '../dispatcher';
 import { getSourcesFromApi,
   getArticlesFromApi,
   getFavoritesFromDatabase,
-  deleteFavoriteFromDatabase } from '../utils/newsApiMethods';
+  deleteFavoriteFromDatabase,
+  scrapeArticle } from '../utils/newsApiMethods';
 
 /**
  * @function getSources
@@ -61,6 +62,15 @@ export function deleteFavorite(article, userId) {
     dispatcher.dispatch({
       type: 'GET_FAVORITES',
       favorites: data,
+    });
+  });
+}
+
+export function getSrappedArticle(url) {
+  scrapeArticle(url, (data) => {
+    dispatcher.dispatch({
+      type: 'SCRAPPED_ARTICLE',
+      scrappedArticle: data,
     });
   });
 }

@@ -9,6 +9,7 @@ import Favorites from './Favorites';
 import ShowArticles from './ShowArticles';
 import Footer from './Footer';
 import NotFound from './NotFound';
+import ReadArticle from './ReadArticle';
 
 /**
  * Create an export a react component
@@ -23,6 +24,7 @@ const Layout = () => (
         <Switch>
           <Route exact path="/" component={localStorage.user ? ShowArticles : Home} />
           <Route path="/favorites" component={localStorage.user ? Favorites : Home} />
+          <Route path="/article" component={ReadArticle} />
           <Route component={NotFound} />
           <div className="clear" />
         </Switch>

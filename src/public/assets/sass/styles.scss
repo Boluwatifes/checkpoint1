@@ -5,6 +5,15 @@
 $myWidth: 100%;
 $myHeight: 100%;
 $myPadding: 40px;
+$overlay: rgba(0,0,0, 0.6);
+
+.myBackground{
+  background-image: url('/imgs/hd3.jpg');
+  background-position: top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
 
 
 html, body {
@@ -15,6 +24,12 @@ html, body {
 
 .h-500 {
   min-height: 500px !important;
+}
+
+.fixed-header{
+  position: fixed;
+  width: 100%;
+  height: 96px;
 }
 
 .avatar-img{
@@ -65,12 +80,13 @@ nav{
   height: auto;
   position: relative;
   display: flex;
+  @extend .myBackground;
 
   .home-inner {
     @extend .valign-wrapper;
     min-height: 75vh;
     box-sizing: border-box;
-    background-color: #fff;
+    background-color: $overlay;
     padding: $myPadding;
 
     .inner-content{
@@ -79,19 +95,37 @@ nav{
       margin: 0 auto;
     }
   }
+  .home-inner-white{
+    @extend .valign-wrapper;
+    min-height: 75vh;
+    box-sizing: border-box;
+    background-color: #fff;
+    padding: $myPadding;
+  }
 }
 
 .mySelect {
   min-height: 50px;
   margin: 20px 0px;
+  color: white;
   select {
     display: block;
-
+    color: black;
   }
 }
 
 .portal {
   width: $myWidth;
+  @extend .myBackground;
+
+  .article-scrapper{
+    max-width: 960px;
+    width: 960px;
+    margin: 80px auto 0 auto;
+    padding: 20px;
+    color: black;
+    background-color: #fff;
+  }
 }
 
 .favorite {
@@ -111,4 +145,26 @@ nav{
   padding: $myPadding / 2;
   background-color: rgb(0, 0, 0);
   color: #fff;
+}
+
+.background {
+    background-color: $overlay;
+}
+
+.myIcons{
+  float: left !important;
+  padding-right: 10px;
+  cursor: pointer;
+}
+
+.share{
+  padding-top:10px;
+  display: block;
+  height: auto;
+}
+
+#floating-button{
+  position: fixed;
+  top: 15%;
+  z-index: 9999999;
 }
