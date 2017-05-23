@@ -7,11 +7,11 @@ const debug = process.env.NODE_ENV !== 'production';
 module.exports = {
   context: __dirname,
   devtool: debug ? 'inline-sourcemap' : null,
-  entry: './src/app/main.js',
+  entry: './src/app/main.jsx',
   module: {
     loaders: [
       {
-        test: /\.jsx?$/,
+        test: /.jsx?$/,
         exclude: /(node_modules|bower_components)/,
         loader: 'babel-loader',
         query: {
@@ -44,6 +44,9 @@ module.exports = {
         ]
       },
     ],
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
   },
   node: {
     console: true,
