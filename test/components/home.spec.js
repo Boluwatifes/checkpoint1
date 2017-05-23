@@ -3,28 +3,28 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import GoogleLogin from 'react-google-login';
-import Body from '../../src/app/components/Home';
+import Home from '../../src/app/components/Home';
 
 global.localStorage = window.localStorage;
 
-describe('Test for <Body /> components', () => {
-  it('should instantiate a body class when called', () => {
-    const wrapper = shallow(<Body />);
-    expect(wrapper.instance().constructor).to.equal(Body);
+describe('Test for <Home /> components', () => {
+  it('should instantiate a Home class when called', () => {
+    const wrapper = shallow(<Home />);
+    expect(wrapper.instance().constructor).to.equal(Home);
   });
 
-  it('should contain a body div', () => {
-    const wrapper = shallow(<Body />);
+  it('should contain a Home div', () => {
+    const wrapper = shallow(<Home />);
     expect(wrapper.find('#body')).to.have.length(1);
   }); 
 
   it('should contain a function that handles login success', () => {
-    const wrapper = shallow(<Body />);
+    const wrapper = shallow(<Home />);
     expect(wrapper.find(GoogleLogin).node.props.onSuccess).to.be.defined;
   });
 
   it('should contain a function that handles login error', () => {
-    const wrapper = shallow(<Body />);
+    const wrapper = shallow(<Home />);
     expect(wrapper.find(GoogleLogin).node.props.onFailure).to.be.defined;
   });
 
@@ -41,16 +41,24 @@ describe('Test for <Body /> components', () => {
           getImageUrl: () => {
             return 'image';
           },
+          getId: () => {
+            return 23345354534;
+          }
         };
       },
     };
-    const wrapper = shallow(<Body />);
-    expect(wrapper.instance().responseGoogle(profile)).to.be.defined;
+    const wrapper = shallow(<Home />);
+    expect(wrapper.instance().handleLoginResponse(profile)).to.be.defined;
   });
 
   it('`errorGoogle` should be called when the login failed', () => {
     const response = '';
-    const wrapper = shallow(<Body />);
-    expect(wrapper.instance().errorGoogle(response)).to.be.defined;
+    const wrapper = shallow(<Home />);
+    expect(wrapper.instance().handleLoginError(response)).to.be.defined;
+  });
+
+  it('contains a render method', () => {
+    const wrapper = shallow(<Home />);
+    expect(wrapper.instance().render()).to.be.defined;
   });
 });

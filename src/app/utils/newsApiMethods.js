@@ -30,6 +30,7 @@ export const getArticlesFromApi = (source, sortBy = '', callback) => {
  * Saves Favorites to the google realtime database
  * @param {object} article
  * @param {string} user
+ * @param {string} source
  * @return {callback} - Calls firebase api
  */
 export const saveFavoritesToDatabase = (article, user, source) => {
@@ -48,6 +49,7 @@ export const saveFavoritesToDatabase = (article, user, source) => {
 /**
  * Gets Favorites from database
  * @param {string} user
+ * @param {func} callback
  * @return {callback} - Calls firebase api
  */
 export const getFavoritesFromDatabase = (user, callback) => {

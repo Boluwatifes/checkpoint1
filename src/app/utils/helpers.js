@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 /**
  * create excerpt from title
  * @function excerpt
@@ -22,11 +20,23 @@ export function cleanSource(source) {
   return newSource.toUpperCase();
 }
 
+/**
+ * Get first name from the save user's name
+ * @function getFirstName
+ * @param {string} string
+ * @returns {string} - Returns the first name
+ */
 export function getFirstName(string) {
   const newString = string.split(' ')[1];
   return `${newString.charAt(0).toUpperCase()}${newString.slice(1)}`;
 }
 
+/**
+ * Removes `?url=` from the url
+ * @function sanitizeUrl
+ * @param {string} url
+ * @returns {string} - formatted url
+ */
 export function sanitizeUrl(url) {
   return url.replace('?url=', '');
 }

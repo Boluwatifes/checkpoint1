@@ -1,7 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+/**
+ * Create a LoggedIn component
+ * @export
+ * @class LoggedIn
+ * @extends {React.Component}
+ */
 export default class LoggedIn extends React.Component {
+
+  /**
+   * Creates an instance of LoggedIn.
+   * @constructor
+   * @memberof LoggedIn
+   */
   constructor() {
     super();
     this.handleLogOut = this.handleLogOut.bind(this);
@@ -11,8 +23,8 @@ export default class LoggedIn extends React.Component {
    * Handles user logout
    * @method logMeOut
    * @param {object} e - Event passed in from the clicked button
+   * @return {event} -
    */
-
   handleLogOut(e) {
     e.preventDefault();
     localStorage.removeItem('user');
@@ -32,7 +44,8 @@ export default class LoggedIn extends React.Component {
         <nav className="h-auto p-10">
           <div className="nav-wrapper">
             <Link className="brand-logo" to="/">NewsNinja</Link>
-            <a href="!#" data-activates="mobile-demo" className="button-collapse" id="nav"><i className="material-icons">menu</i></a>
+            <a href="!#" data-activates="mobile-demo" className="button-collapse" id="nav">
+              <i className="material-icons">menu</i></a>
             <ul className="right hide-on-med-and-down">
               <li><Link to="/favorites">Favourites</Link></li>
               <li><img className="avatar-img" src={user.image} alt="User Avatar" /></li>

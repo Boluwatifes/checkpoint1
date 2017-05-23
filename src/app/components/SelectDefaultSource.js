@@ -66,6 +66,13 @@ export default class Sources extends React.Component {
     }
   }
 
+  /**
+   * Set the current news source to local storage
+   * @method setDefaultNews
+   * @param {any} e
+   * @memberof Sources
+   * @return {null} -
+   */
   setDefaultNews(e) {
     localStorage.setItem('defaultNews', e.value);
     location.reload();
@@ -93,12 +100,17 @@ export default class Sources extends React.Component {
     return (
       <div className="col s12 home-inner" >
         <div className="inner-content center m-auto">
-          <span className="center"><img alt="loading" src="imgs/welcome.gif" height="100" width="100"/></span>
+          <span className="center">
+            <img alt="loading" src="imgs/welcome.gif" height="100" width="100" />
+          </span>
           <h5 className="center" style={{ color: 'white' }}>Welcome <span style={{ 'fontSize': '32px', 'color': 'green' }}>{getFirstName(user.name)}</span>,</h5>
           <p className="center" style={{ color: 'white' }}> Please Select A News Source to continue </p>
           <div>
             <span className="center">
-              <SimpleSelect placeholder="Search for news source" onValueChange={this.setDefaultNews}>
+              <SimpleSelect
+                placeholder="Search for news source"
+                onValueChange={this.setDefaultNews}
+              >
                 {AllSources}
               </SimpleSelect>
             </span>
