@@ -88,3 +88,10 @@
 *  To run the tests, navigate to the project's root folder
 *  Run the following commands.
   *  `npm test`
+  
+  
+## Limitations
+This app and its functions are limited by the time constraint.
+
+## How to contribute
+To contribute, fork this repo to your private repository and follow the wiki conventions on branch naming, commit messages and pull request.
