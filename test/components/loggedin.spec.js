@@ -30,6 +30,6 @@ describe('Test for <LoggedIn /> component', () => {
       },
     };
     const wrapper = shallow(<LoggedIn />);
-    expect(wrapper.instance().logMeOut(e)).to.be.defined;
+    expect(wrapper.instance().handleLogOut(e)).to.be.defined;
   });
 });

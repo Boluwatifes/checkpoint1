@@ -35,7 +35,7 @@ describe('Test for <Layout /> components', () => {
 
   it('contains three <Route /> component', () => {
     const wrapper = shallow(<Layout />);
-    expect(wrapper.find(Route)).to.have.length(3);
+    expect(wrapper.find(Route)).to.have.length(4);
   });
 
   it('display `Body` component if the user is not logged in', () => {

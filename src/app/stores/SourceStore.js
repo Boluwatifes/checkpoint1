@@ -11,7 +11,6 @@ class SourceStore extends EventEmitter {
    * sets the sources, articles to an empty []
    * @constructor
    */
-
   constructor() {
     super();
     this.sources = {};
@@ -20,7 +19,7 @@ class SourceStore extends EventEmitter {
 
   /**
    * @method getSources
-   * @return sources - The news source stored in the constructor
+   * @return {object} sources - The news source stored in the constructor
    */
   getSources() {
     return this.sources;
@@ -29,7 +28,8 @@ class SourceStore extends EventEmitter {
   /**
    * Receives actions and update the stores accordingly
    * @method handleActions
-   * @param {object} - Action type and data
+   * @param {object} action - Action type and data
+   * @return {null} -
    */
   handleActions(action) {
     if (action.type === 'GET_ALL_SOURCES') {

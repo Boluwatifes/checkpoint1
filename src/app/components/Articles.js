@@ -1,10 +1,12 @@
+// import dependencies
 import React from 'react';
 import PropTypes from 'prop-types';
 import swal from 'sweetalert2';
+import $ from 'jquery';
 import { saveFavoritesToDatabase } from '../utils/newsApiMethods';
 import { excerpt, cleanSource } from '../utils/helpers';
 
-
+// displays a modal when user add favorite
 $('body').on('click', '#addFav', () => {
   swal({
     title: 'Success!',
@@ -13,6 +15,7 @@ $('body').on('click', '#addFav', () => {
   });
 });
 
+// displays a modal when user deletes favorites
 $('body').on('click', '#deleteFav', () => {
   swal({
     title: 'Success!',
@@ -20,6 +23,7 @@ $('body').on('click', '#deleteFav', () => {
     type: 'success',
   });
 });
+
 /**
  * Create a react component
  * @class Article
@@ -172,4 +176,6 @@ export default class Article extends React.Component {
 
 Article.propTypes = {
   articles: PropTypes.any,
+  deleteFavorite: PropTypes.func,
+  type: PropTypes.string,
 };

@@ -6,12 +6,13 @@
         "localStorage": true,
         "$": true,
         "console": true,
-        "document": true
+        "document": true,
+        "location": true
   },
     "rules": {
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-        "class-methods-use-this": ["error", { "exceptMethods": ["handleLoginResponse", "errorGoogle", 
-        "logMeOut", "componentWillMount", "componentWillUnmount", "render"] }],
+        "class-methods-use-this": ["error", { "exceptMethods": ["handleLoginResponse", "deleteFavorite", "handleLoginError",
+        "handleLogOut", "componentWillMount", "componentWillUnmount", "saveUsersFavorites", "setDefaultNews", "render"] }],
         "react/jsx-boolean-value": "off",
         "react/no-array-index-key": "off",
         "jsx-a11y/img-redundant-alt": "off",

@@ -11,7 +11,6 @@ class ArticlesStore extends EventEmitter {
    * sets the sources, articles to an empty []
    * @constructor
    */
-
   constructor() {
     super();
     this.articles = {};
@@ -20,7 +19,7 @@ class ArticlesStore extends EventEmitter {
 
   /**
    * @method getArticles
-   * @return articles - The articles stored in the constructor
+   * @return {object} articles - The articles stored in the constructor
    */
   getArticles() {
     return this.articles;
@@ -29,7 +28,8 @@ class ArticlesStore extends EventEmitter {
   /**
    * Receives actions and update the stores accordingly
    * @method handleActions
-   * @param {object} - Action type and data
+   * @param {object} action - Action type and data
+   * @return {null} -
    */
   handleActions(action) {
     if (action.type === 'FETCH_ARTICLES') {

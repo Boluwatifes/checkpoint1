@@ -3,21 +3,27 @@ import React from 'react';
 import { expect } from 'chai';
 import { shallow, mount } from 'enzyme';
 import sinon from 'sinon';
-import Portal from '../../src/app/components/ShowArticles';
+import ShowArticles from '../../src/app/components/ShowArticles';
+import Articles from '../../src/app/components/Articles';
+import SortBy from '../../src/app/components/SortBy';
+import Sources from '../../src/app/components/Sources';
 
-describe('Test for <Portal /> component', () => {
+global.localStorage = window.localStorage;
+
+describe('Test for <ShowArticles /> component', () => {
   it('should return an instance of a class', () => {
-    const wrapper = mount(<Portal />);
+    localStorage.defaultNews = 'bbc-news';
+    const wrapper = mount(<ShowArticles />);
     const inst = wrapper.instance();
-    expect(inst).to.be.instanceOf(Portal);
+    expect(inst).to.be.instanceOf(ShowArticles);
   });
 
   it('should return a default state when called', () => {
-    const wrapper = mount(<Portal />);
+    const wrapper = mount(<ShowArticles />);
     const source = localStorage.defaultNews ? localStorage.defaultNews : 'bbc-news';
     const state = {
       source,
-      articles: null,
+      articles: {},
       currentSort: '',
       loading: true,
       sortBy: ['top'],
@@ -26,38 +32,43 @@ describe('Test for <Portal /> component', () => {
   });
 
   it('calls componentWillMount', () => {
-    sinon.spy(Portal.prototype, 'componentWillMount');
-    const wrapper = mount(<Portal />);
-    expect(Portal.prototype.componentWillMount.calledOnce).to.equal(true);
+    sinon.spy(ShowArticles.prototype, 'componentWillMount');
+    const wrapper = mount(<ShowArticles />);
+    expect(ShowArticles.prototype.componentWillMount.calledOnce).to.equal(true);
   });
 
   it('contains a getArticles method', () => {
-    const wrapper = shallow(<Portal />);
-    expect(wrapper.instance().getArticles()).to.be.defined;
-  });
-
-  it('contains a processClick method', () => {
-    const wrapper = shallow(<Portal />);
-    expect(wrapper.instance().processClick).to.be.defined;
+    localStorage.user = JSON.stringify({
+      name: 'Bamidele Daniel',
+      email: 'andela-dbamidele@andela.com',
+      id: 458655605656956,
+    });
+    const wrapper = mount(<ShowArticles />);
+    expect(wrapper.node.getArticle).to.be.defined;
   });
 
   it('contains a processSort method', () => {
-    const wrapper = shallow(<Portal />);
+    const wrapper = shallow(<ShowArticles />);
     expect(wrapper.instance().processSort).to.be.defined;
   });
 
    it('contains a render method', () => {
-    const wrapper = mount(<Portal />);
+    const wrapper = mount(<ShowArticles />);
     expect(wrapper.instance().render()).to.be.defined;
-  });
+   });
 
   it('contains an article component', () => {
-    const wrapper = shallow(<Portal />);
-    expect(wrapper.find('.portal')).to.have.length(1);
+    const wrapper = shallow(<ShowArticles />);
+    expect(wrapper.find(Articles)).to.have.length(1);
   });
 
-  it('contains an article component', () => {
-    const wrapper = shallow(<Portal />);
-    expect(wrapper.instance().render().props.children).to.have.length(3);
+  it('contains a sortby component', () => {
+    const wrapper = shallow(<ShowArticles />);
+    expect(wrapper.find(SortBy)).to.have.length(1);
+  });
+
+  it('contains a source component', () => {
+    const wrapper = shallow(<ShowArticles />);
+    expect(wrapper.find(Sources)).to.have.length(1);
   });
 });

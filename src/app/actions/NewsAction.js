@@ -7,11 +7,9 @@ import { getSourcesFromApi,
   scrapeArticle } from '../utils/newsApiMethods';
 
 /**
- * @function getSources
- * This function call the apiAll method in the api module
- * This function call the apiAll method in the api module,
- * returns the news sources and
- * dispatch action to the store
+ * This function call the getSourcesFromApi method in the api module
+ * @function getAllSources
+ * @return {data} - dispatches action and data to the store
  */
 export function getAllSources() {
   getSourcesFromApi((data) => {
@@ -23,12 +21,11 @@ export function getAllSources() {
 }
 
 /**
+ * This function call the apiArticlesFromApi method in the api module,
  * @function getArticles
- * This function call the apiAll method in the api module,
- * returns the news articles and
- * dispatch action to the store
  * @param {string} source - The news source
  * @param {string} sortBy - The news filter
+ * @return {data} - dispatches action and data to the store
  */
 export function getArticles(source, sortBy) {
   getArticlesFromApi(source, sortBy, (data) => {
@@ -40,7 +37,7 @@ export function getArticles(source, sortBy) {
 }
 
 /**
- * This function call the apiAll method in the api module,
+ * This function call the getFavoritesFromDatabase method in the api module,
  * returns the news articles and
  * dispatch action to the store
  * @function getFavorites
@@ -56,6 +53,14 @@ export function getFavorites(user) {
   });
 }
 
+/**
+ * This function calls deleteFavoriteFromDatabase function in the api module
+ * @function deleteFavorite
+ * @export {data} - Dispatch actions to the favorite store
+ * @param {any} article - the article id
+ * @param {any} userId - the user id
+ * @return {null} -
+ */
 export function deleteFavorite(article, userId) {
   deleteFavoriteFromDatabase(article, userId);
   getFavoritesFromDatabase(userId, (data) => {
@@ -66,6 +71,12 @@ export function deleteFavorite(article, userId) {
   });
 }
 
+/**
+ * This method calls scrapeArticle method in the api method and return an object
+ * @function getScrappedArticle
+ * @param {any} url - url of the article
+ * @return {null} -
+ */
 export function getSrappedArticle(url) {
   scrapeArticle(url, (data) => {
     dispatcher.dispatch({

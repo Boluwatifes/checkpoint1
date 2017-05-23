@@ -3,11 +3,21 @@ import {
   ShareButtons,
   generateShareIcon
 } from 'react-share';
+import PropTypes from 'prop-types';
 import ScrapeArticleStore from '../stores/ScrapeArticleStore';
 import * as NewsAction from '../actions/NewsAction';
 import { sanitizeUrl, stripUrl } from '../utils/helpers';
 
+/**
+ * Create a react component
+ * @class ReadArticle
+ */
 export default class ReadArticle extends React.Component {
+  /**
+   * Create a constructor
+   * @constructor
+   * @param {object} props
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -18,14 +28,42 @@ export default class ReadArticle extends React.Component {
     this.currentUrl = window.location.href;
   }
 
+  /**
+   * Call action on initial page load
+   * @method componentWillMount
+   * @memberof FReadArticle
+   * @return {null} -
+   */
   componentWillMount() {
     NewsAction.getSrappedArticle(sanitizeUrl(this.props.location.search));
   }
 
+  /**
+   * Attach an event listener to scrapeArticle store
+   * @method componentDidMount
+   * @memberof ReadArticle
+   * @return {null} -
+   */
   componentDidMount() {
     ScrapeArticleStore.on('change', this.processScrappedArticle);
   }
 
+  /**
+   * Remove event listener from scrapeArticle store
+   * @method componentWillUnount
+   * @memberof ReadArticle
+   * @return {null} -
+   */
+  componentWillUnmount() {
+    ScrapeArticleStore.removeListener('change', this.proccessScrappedArticle);
+  }
+
+  /**
+   * Get scrapped article from the store and update the state
+   * @method processScrappedArticle
+   * @memberof ReadArticle
+   * @return {null} -
+   */
   processScrappedArticle() {
     const scrappedArticle = ScrapeArticleStore.getSrappedArticle();
     this.setState({
@@ -34,6 +72,12 @@ export default class ReadArticle extends React.Component {
     });
   }
 
+  /**
+   * Render to the dom
+   * @method render
+   * @memberof ReadArticle
+   * @returns {any} -
+   */
   render() {
     let DisplayArticle;
     const {
@@ -52,16 +96,23 @@ export default class ReadArticle extends React.Component {
     const WhatsappIcon = generateShareIcon('whatsapp');
     if (this.state.loading) {
       DisplayArticle = (
-        <div>
+        <div id="article">
           <span className="center"><img alt="loading" src="imgs/loading.gif" /></span>
           <p className="center">Please Wait .....</p>
         </div>
       );
     } else if (this.state.article === 'error') {
       DisplayArticle = (
-        <div>
-          <h4>An error occur! Please try again later or click the button below to read from source</h4>
-          <span><a href={sanitizeUrl(this.props.location.search)} className="waves-effect waves-light btn" target="blank">Click Here To Read</a></span>
+        <div id="article">
+          <h4>An error occur! Please try again later&nbsp;
+          or click the button below to read from source</h4>
+          <span>
+            <a
+              href={sanitizeUrl(this.props.location.search)}
+              className="waves-effect waves-light btn"
+              target="blank"
+            >Click Here To Read</a>
+          </span>
         </div>
       );
     } else {
@@ -170,7 +221,12 @@ export default class ReadArticle extends React.Component {
     return (
       <div className="portal">
         <div className="col s12 home-inner">
-          <a className="btn-floating btn-large waves-effect waves-light red" id="floating-button" href="/"><i className="material-icons">keyboard_arrow_left</i></a>
+          <a
+            className="btn-floating btn-large waves-effect waves-light red"
+            id="floating-button" href="/"
+          >
+            <i className="material-icons">keyboard_arrow_left</i>
+          </a>
           <div className="inner-content left-align m-auto article-scrapper">
             {DisplayArticle}
           </div>
@@ -179,4 +235,11 @@ export default class ReadArticle extends React.Component {
     );
   }
 }
+
+ReadArticle.propTypes = {
+  location: {
+    search: PropTypes.any,
+  }
+};
+
 

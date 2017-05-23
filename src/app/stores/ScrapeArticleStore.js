@@ -19,7 +19,7 @@ class ScrapeArticleStore extends EventEmitter {
 
   /**
    * @method getSources
-   * @return sources - The news source stored in the constructor
+   * @return {null} sources - The news source stored in the constructor
    */
   getSrappedArticle() {
     return this.scrappedArticle;
@@ -28,7 +28,8 @@ class ScrapeArticleStore extends EventEmitter {
   /**
    * Receives actions and update the stores accordingly
    * @method handleActions
-   * @param {object} - Action type and data
+   * @param {object} action - Action type and data
+   * @return {null} -
    */
   handleActions(action) {
     if (action.type === 'SCRAPPED_ARTICLE') {
