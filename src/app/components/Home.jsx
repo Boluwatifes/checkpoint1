@@ -6,13 +6,14 @@ import GoogleLogin from 'react-google-login';
  * Create a react component
  * @class Body
  */
-export default class Body extends React.Component {
+export default class Home extends React.Component {
   /**
    * Set user's state to either logged in or not logged in
    * @constructor
+   * @param {object} props
    */
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.handleLoginResponse = this.handleLoginResponse.bind(this);
     this.handleLoginError = this.handleLoginError.bind(this);
   }
@@ -89,3 +90,4 @@ export default class Body extends React.Component {
     );
   }
 }
+

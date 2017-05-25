@@ -6,10 +6,16 @@
   "scripts": {
     "dev": "webpack-dev-server --content-base src/public --hot --inline",
     "test": "nyc --reporter=html --reporter=text mocha -r mock-local-storage --compilers js:babel-register --colors --report lcovonly -- ./test/**/*.spec.js && codecov --token=2f4bcce5-91f5-43ac-b1d9-cbed53ce36dd",
-    "test:watch": "npm test -- --watch",
+    "test:watch": "npm test -- --watch --compilers js:babel-register --colors --report lcovonly",
+    "jest": "jest __tests__/component/ --coverage",
     "build": "NODE_ENV=production webpack --config  --progress --colors",
     "start": "node src/app/server.js",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
+  },
+  "jest": {
+    "globals": {
+      "widow": true
+    }
   },
   "repository": {
     "type": "git",
@@ -27,6 +33,7 @@
   },
   "homepage": "https://github.com/Boluwatifes/andela24#readme",
   "devDependencies": {
+    "babel-jest": "^20.0.3",
     "babel-register": "^6.24.1",
     "css-loader": "^0.28.0",
     "enzyme": "^2.8.2",
@@ -39,6 +46,7 @@
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.11.1",
     "image-webpack-loader": "^3.3.1",
+    "jest": "^20.0.3",
     "jsdom": "10.1.0",
     "jsdom-global": "3.0.2",
     "mocha-jsdom": "^1.1.0",

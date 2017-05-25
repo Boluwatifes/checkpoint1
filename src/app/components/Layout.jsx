@@ -3,6 +3,7 @@ import {
   Route,
  Switch, BrowserRouter as Router } from 'react-router-dom';
 import React from 'react';
+import { createBrowserHistory } from 'history';
 import Header from './Header';
 import Home from './Home';
 import Favorites from './Favorites';
@@ -16,8 +17,10 @@ import ReadArticle from './ReadArticle';
  * @class Layout
  */
 
+const history = createBrowserHistory();
+
 const Layout = () => (
-  <Router>
+  <Router history={history}>
     <div className="width-100">
       <Header />
       <div className="row home-div m-0">

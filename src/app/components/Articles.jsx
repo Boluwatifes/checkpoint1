@@ -77,10 +77,10 @@ export default class Article extends React.Component {
    * @memberof ShowArticles
    */
   saveUsersFavorites(articleIndex) {
-    const articles = JSON.parse(localStorage.articles);
+    const articles = JSON.parse(localStorage.getItem('articles'));
     const articleToSave = articles[articleIndex];
-    const userId = JSON.parse(localStorage.user).id;
-    const source = localStorage.defaultNews;
+    const userId = JSON.parse(localStorage.getItem('user')).id;
+    const source = localStorage.getItem('defaultNews');
     saveFavoritesToDatabase(articleToSave, userId, source);
   }
 
