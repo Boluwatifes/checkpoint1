@@ -1,5 +1,5 @@
 import Firebase from 'firebase';
- 
+
  // Firebase Configuration
 const config = {
   apiKey: process.env.FIREBASE_KEY,

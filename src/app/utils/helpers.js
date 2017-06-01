@@ -23,12 +23,12 @@ export function cleanSource(source) {
 /**
  * Get first name from the save user's name
  * @function getFirstName
- * @param {string} string
+ * @param {string} name
  * @returns {string} - Returns the first name
  */
-export function getFirstName(string) {
-  const newString = string.split(' ')[1];
-  return `${newString.charAt(0).toUpperCase()}${newString.slice(1)}`;
+export function getFirstName(name) {
+  const newName = name.split(' ')[1];
+  return `${newName.charAt(0).toUpperCase()}${newName.slice(1)}`;
 }
 
 /**
@@ -37,9 +37,17 @@ export function getFirstName(string) {
  * @param {string} url
  * @returns {string} - formatted url
  */
-export function sanitizeUrl(url) {
-  return url.replace('?url=', '');
-}
+export const sanitizeUrl = url => (
+  url.replace('?url=', '')
+);
 
-export const stripUrl = url => url.split('/')[2].split('.')[1].replace('-', ' ').toUpperCase();
+export /**
+ * Gets source name from url string
+ * @function stripUrl
+ * @param {string} url
+ * @return {string} - source
+ */
+const stripUrl = url => (
+  url.split('/')[2].split('.')[1].replace('-', ' ').toUpperCase()
+);
 

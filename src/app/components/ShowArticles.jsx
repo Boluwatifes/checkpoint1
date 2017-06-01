@@ -20,10 +20,11 @@ export default class ShowArticles extends React.Component {
   constructor() {
     super();
     NewsAction.getAllSources();
-    this.source = localStorage.defaultNews ? localStorage.defaultNews : '';
+    this.source = localStorage.getItem('defaultNews')
+      ? localStorage.getItem('defaultNews') : '';
     this.state = {
       source: this.source,
-      articles: {},
+      articles: [],
       currentSort: '',
       loading: true,
       sortBy: ['top'],
@@ -33,7 +34,6 @@ export default class ShowArticles extends React.Component {
     this.getArticles = this.getArticles.bind(this);
     this.handlesSourceChange = this.handlesSourceChange.bind(this);
     this.handlesArticleSorting = this.handlesArticleSorting.bind(this);
-    this.saveUsersFavorites = this.saveUsersFavorites.bind(this);
   }
 
   /**
@@ -48,7 +48,8 @@ export default class ShowArticles extends React.Component {
   }
 
   /**
-   * Add event Listener to the Article Store and fires when the component is fully mounted
+   * Add event Listener to the Article Store and fires
+   * when the component is fully mounted
    * @method componentDidMount
    * @returns {event} - register event
    */
@@ -66,7 +67,8 @@ export default class ShowArticles extends React.Component {
   }
 
   /**
-   * gets the articles for a given source and set the state to reflect the articles
+   * gets the articles for a given source and
+   * set the state to reflect the articles
    * @method getArticles
    * @return {state} - Redeclare the state
    */
@@ -89,6 +91,7 @@ export default class ShowArticles extends React.Component {
    */
   handlesSourceChange(e) {
     if (e !== undefined) {
+      // gets the articles from the api endpoint
       NewsAction.getArticles(e.value, '');
       this.setState({
         source: e.value,
@@ -115,28 +118,20 @@ export default class ShowArticles extends React.Component {
   }
 
   /**
-   * Saves users favorites to firebase database
-   * @method savesUsersFavorites
-   * @param {object} e
-   * @return {object} data
-   * @memberof ShowArticles
-   */
-  saveUsersFavorites(e) {
-    console.log(e);
-  }
-
-  /**
    * Render react component
    * @method render
    * @return {function} react-component
    */
   render() {
+    // display articles for a user that is already logged in
     const DisplayForReturningUser = (
       <div className="background">
         <div className="mySelect col s12">
           <div className="col s12 m12 l4">
             <h5>
-              {this.state.currentSort.toUpperCase()} News From {cleanSource(this.state
+              {this.state
+                .currentSort
+                .toUpperCase()} News From {cleanSource(this.state
               .source)} </h5>
           </div>
           <div className="col s12 m6 l4">
@@ -158,10 +153,12 @@ export default class ShowArticles extends React.Component {
       </div>
     );
 
+    // display a dropdown that allows the user to select a
+    // news source to continue
     const DislayForNewUser = (
       <SelectDefaultSource />
     );
-    const defaultNews = localStorage.defaultNews;
+    const defaultNews = localStorage.getItem('defaultNews');
     return (
       <div className="portal">
         {defaultNews ? DisplayForReturningUser : DislayForNewUser}

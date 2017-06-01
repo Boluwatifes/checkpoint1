@@ -3,4 +3,5 @@ node_modules
 .vscode
 coverage
 scratch
-.env
+.idea
+codeclimate-master

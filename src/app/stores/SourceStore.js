@@ -39,7 +39,7 @@ class SourceStore extends EventEmitter {
   }
 }
 
-// create a new instance of `NewsStore`
+// create a new instance of `SourceStore`
 const sourceStore = new SourceStore();
 
 // register a dispatcher and bind it to the `handleAction` method

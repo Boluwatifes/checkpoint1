@@ -1,9 +1,10 @@
-### Andela News 24
+### NewsNinja - The modest News App!
 
-[![Code Climate](https://codeclimate.com/github/Boluwatifes/andela24/badges/gpa.svg)](https://codeclimate.com/github/Boluwatifes/andela24)
-[![Coverage Status](https://coveralls.io/repos/github/Boluwatifes/andela24/badge.svg?branch=master)](https://coveralls.io/github/Boluwatifes/andela24?branch=master)
-[![Issue Count](https://codeclimate.com/github/Boluwatifes/andela24/badges/issue_count.svg)](https://codeclimate.com/github/Boluwatifes/andela24)
-[![Build Status](https://travis-ci.org/Boluwatifes/andela24.svg?branch=master)](https://travis-ci.org/Boluwatifes/andela24)
+[![Code Climate](https://codeclimate.com/github/andela-dbamidele/checkpoint1/badges/gpa.svg)](https://codeclimate.com/github/andela-dbamidele/checkpoint1)
+[![Coverage Status](https://coveralls.io/repos/github/andela-dbamidele/checkpoint1/badge.svg?branch=master)](https://coveralls.io/github/andela-dbamidele/checkpoint1?branch=master)
+[![Issue Count](https://codeclimate.com/github/andela-dbamidele/checkpoint1/badges/issue_count.svg)](https://codeclimate.com/github/andela-dbamidele/checkpoint1)
+[![Build Status](https://travis-ci.org/andela-dbamidele/checkpoint1.svg?branch=master)](https://travis-ci.org/andela-dbamidele/checkpoint1)
+[![codecov](https://codecov.io/gh/andela-dbamidele/checkpoint1/branch/master/graph/badge.svg)](https://codecov.io/gh/andela-dbamidele/checkpoint1)
 
 ## Introduction
 *  **`NewsNinja`** is a React Powered News Feed App.
@@ -83,15 +84,41 @@
   *  `npm start`
 
 ## Tests
-*  The tests have been written using Mocha and Enzyme.
+*  The tests have been written using Jest and Enzyme.
 *  They are run using the **`coverage`** tool in order to generate test coverage reports.
 *  To run the tests, navigate to the project's root folder
 *  Run the following commands.
   *  `npm test`
   
-  
-## Limitations
-This app and its functions are limited by the time constraint.
 
 ## How to contribute
 To contribute, fork this repo to your private repository and follow the wiki conventions on branch naming, commit messages and pull request.
+
+## Limitations
+This app and its functions are limited by the time constraint.
+
+### Troubleshooting & FAQ
+Not available at the moment
+
+## License
+
+(The MIT License)
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+'Software'), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

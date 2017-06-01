@@ -9,10 +9,10 @@ import { getSourcesFromApi,
 /**
  * This function call the getSourcesFromApi method in the api module
  * @function getAllSources
- * @return {data} - dispatches action and data to the store
+ * @return {void} - dispatches action and data to the store
  */
 export function getAllSources() {
-  getSourcesFromApi((data) => {
+  return getSourcesFromApi().then((data) => {
     dispatcher.dispatch({
       type: 'GET_ALL_SOURCES',
       sources: data,
@@ -25,10 +25,10 @@ export function getAllSources() {
  * @function getArticles
  * @param {string} source - The news source
  * @param {string} sortBy - The news filter
- * @return {data} - dispatches action and data to the store
+ * @return {void} - dispatches action and data to the store
  */
 export function getArticles(source, sortBy) {
-  getArticlesFromApi(source, sortBy, (data) => {
+  return getArticlesFromApi(source, sortBy).then((data) => {
     dispatcher.dispatch({
       type: 'FETCH_ARTICLES',
       articles: data,
@@ -42,7 +42,7 @@ export function getArticles(source, sortBy) {
  * dispatch action to the store
  * @function getFavorites
  * @param {string} user - The news filter
- * @return {null} - Dispatches Action
+ * @return {void} - Dispatches Action
  */
 export function getFavorites(user) {
   getFavoritesFromDatabase(user, (data) => {
@@ -51,6 +51,7 @@ export function getFavorites(user) {
       favorites: data,
     });
   });
+  return true;
 }
 
 /**
@@ -59,7 +60,7 @@ export function getFavorites(user) {
  * @export {data} - Dispatch actions to the favorite store
  * @param {any} article - the article id
  * @param {any} userId - the user id
- * @return {null} -
+ * @return {void} -
  */
 export function deleteFavorite(article, userId) {
   deleteFavoriteFromDatabase(article, userId);
@@ -69,16 +70,17 @@ export function deleteFavorite(article, userId) {
       favorites: data,
     });
   });
+  return true;
 }
 
 /**
  * This method calls scrapeArticle method in the api method and return an object
  * @function getScrappedArticle
  * @param {any} url - url of the article
- * @return {null} -
+ * @return {void} -
  */
 export function getSrappedArticle(url) {
-  scrapeArticle(url, (data) => {
+  return scrapeArticle(url).then((data) => {
     dispatcher.dispatch({
       type: 'SCRAPPED_ARTICLE',
       scrappedArticle: data,

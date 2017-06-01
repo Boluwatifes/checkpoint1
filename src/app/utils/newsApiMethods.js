@@ -4,30 +4,31 @@ import Firebase from 'firebase';
 
 /**
  * Make an api call to newsapi to get the news sources
- * @function apiAll
- * @param {function} callback - Function to process the data
- * @return {promise} callback
+ * @function getSourcesFromApi
+ * @return {promise} sources
  */
-export const getSourcesFromApi = (callback) => {
+export const getSourcesFromApi = () => (
   axios.get('https://newsapi.org/v1/sources?language=en')
-    .then(response => callback(response.data.sources));
-};
+    .then(response => response.data.sources)
+);
 
 /**
  * Make an api call to newsapi to get articles from a news source
- * @function apiOne
+ * @function getArticlesFromApi
  * @param {string} source - The news source to fetch the articles from
- * @param {string} sortBy - The filter to use on the news source. Default is an empty string
- * @param {function} callback - Function to process the data
+ * @param {string} sortBy - The filter to use on the
+ * news source. Default is an empty string
  * @return {promise} callback
  */
-export const getArticlesFromApi = (source, sortBy = '', callback) => {
-  axios.get(`https://newsapi.org/v1/articles?source=${source}&sortBy=${sortBy}&apiKey=213327409d384371851777e7c7f78dfe`)
-    .then(response => callback(response.data));
-};
+export const getArticlesFromApi = (source, sortBy = '') => (
+  axios.get('https://newsapi.org/v1/articles?' +
+    `source=${source}&sortBy=${sortBy}&apiKey=213327409d384371851777e7c7f78dfe`)
+    .then(response => response.data)
+);
 
 /**
  * Saves Favorites to the google realtime database
+ * @function saveFavoritesToDatabase
  * @param {object} article
  * @param {string} user
  * @param {string} source
@@ -35,7 +36,7 @@ export const getArticlesFromApi = (source, sortBy = '', callback) => {
  */
 export const saveFavoritesToDatabase = (article, user, source) => {
   const title = article.title.replace(/\.|-|,|\/|@|#|\$|%|\^\*\(\)!|`|~/g, 'a');
-  Firebase.database().ref(`favorites/${user}/${title}`).update({
+  return Firebase.database().ref(`favorites/${user}/${title}`).update({
     title,
     source,
     description: article.description,
@@ -50,7 +51,7 @@ export const saveFavoritesToDatabase = (article, user, source) => {
  * Gets Favorites from database
  * @param {string} user
  * @param {func} callback
- * @return {callback} - Calls firebase api
+ * @return {callback} - promise
  */
 export const getFavoritesFromDatabase = (user, callback) => {
   const ref = Firebase.database().ref().child(`favorites/${user}`);
@@ -72,7 +73,14 @@ export const getFavoritesFromDatabase = (user, callback) => {
   });
 };
 
-export const deleteFavoriteFromDatabase = (title, userId) => {
+export /**
+ * deletes an article from the list of a user favorites
+ * @function deleteFavoriteFromDatabase
+ * @param {string} title
+ * @param {string} userId
+ * @return {void}
+ */
+const deleteFavoriteFromDatabase = (title, userId) => {
   Firebase.database().ref(`favorites/${userId}/${title}`).update({
     title: null,
     source: null,
@@ -84,13 +92,16 @@ export const deleteFavoriteFromDatabase = (title, userId) => {
   });
 };
 
-export const scrapeArticle = (url, callback) => {
-  axios.get(`https://document-parser-api.lateral.io/?url=${url}&subscription-key=b296f0a1bd55773dde9b5feaee0f6cf1`, {
+export /**
+ * Get the content of a specific article from api
+ * @function scrapeArticle
+ * @param {string} url
+ * @return {object} article
+ */
+const scrapeArticle = url => (
+  axios.get('https://document-parser-api.lateral.io/' +
+  `?url=${url}&subscription-key=b296f0a1bd55773dde9b5feaee0f6cf1`, {
     responseType: 'json',
-  }).then((data) => {
-    callback(data.data);
-  }).catch((error) => {
-    callback('error');
-  });
-};
+  }).then(data => data.data).catch(() => 'error')
+);
 

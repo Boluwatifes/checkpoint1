@@ -1,5 +1,10 @@
 import React from 'react';
 
+/**
+ * displays an error page when user navigates to an alien page
+ * @function NotFound
+ * @return {void} - React component
+ */
 const NotFound = () => (
   <div className="col s12 home-inner" id="notFound">
     <div className="inner-content center m-auto">
