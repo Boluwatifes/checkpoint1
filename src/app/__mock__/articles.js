@@ -1,3 +1,4 @@
+// creates an article mock
 const articles = [
   {
     title: 'Hello World',

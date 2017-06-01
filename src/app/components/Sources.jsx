@@ -33,7 +33,8 @@ export default class Sources extends React.Component {
   }
 
   /**
-   * Add event Listener to the Sources Store and fires when the component is fully mounted
+   * Add event Listener to the Sources Store and
+   * fires when the component is fully mounted
    * @method componentDidMount
    * @returns {event} - register event
    */
@@ -57,12 +58,10 @@ export default class Sources extends React.Component {
    */
   getSources() {
     const rawSources = SourceStore.getSources();
-    if (rawSources) {
-      this.setState({
-        sources: rawSources,
-        loading: false,
-      });
-    }
+    this.setState({
+      sources: rawSources,
+      loading: false,
+    });
   }
 
   /**
@@ -71,6 +70,7 @@ export default class Sources extends React.Component {
    * @return {function} react-component
    */
   render() {
+    // gets method from props
     const handlesSourceChange = this.props.handlesSourceChange;
     let AllSources;
     // set sources to loading if the `this.state.loading` is true
@@ -81,17 +81,34 @@ export default class Sources extends React.Component {
     } else {
       // map the sources to `AllSources`
       AllSources = this.state.sources.map(source => (
-        <option key={Math.random + source.name} value={source.id}>{source.name}</option>
+        <option
+          key={Math.random + source.name}
+          value={source.id}
+        >
+          {source.name}
+        </option>
       ));
     }
     return (
-      <SimpleSelect placeholder="Change News Source" onValueChange={handlesSourceChange}>
+      <SimpleSelect
+        placeholder="Change News Source"
+        onValueChange={handlesSourceChange}
+      >
         {AllSources}
       </SimpleSelect>
     );
   }
 }
 
+// props validation
 Sources.propTypes = {
   handlesSourceChange: PropTypes.func,
 };
+
+// default props
+Sources.defaultProps = {
+  handlesSourceChange: () => {
+    //
+  }
+};
+

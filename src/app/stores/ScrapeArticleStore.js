@@ -39,7 +39,7 @@ class ScrapeArticleStore extends EventEmitter {
   }
 }
 
-// create a new instance of `NewsStore`
+// create a new instance of `ScrapeArticleStore`
 const scrapeArticleStore = new ScrapeArticleStore();
 
 // register a dispatcher and bind it to the `handleAction` method

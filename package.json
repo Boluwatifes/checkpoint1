@@ -5,9 +5,10 @@
   "main": "server.js",
   "scripts": {
     "dev": "webpack-dev-server --content-base src/public --hot --inline",
-    "test": "nyc --reporter=html --reporter=text mocha -r mock-local-storage --compilers js:babel-register --colors --report lcovonly -- ./test/**/*.spec.js && codecov --token=2f4bcce5-91f5-43ac-b1d9-cbed53ce36dd",
+    "tester": "nyc --reporter=html --reporter=text --colors --report lcovonly -- jest --coverage && codecov --token=74f86539-f845-42ae-a970-52c9babe2a09",
     "test:watch": "npm test -- --watch --compilers js:babel-register --colors --report lcovonly",
-    "jest": "jest __tests__/component/ --coverage",
+    "test": "jest && codecov --token=74f86539-f845-42ae-a970-52c9babe2a09",
+    "jest": "jest --coverage",
     "build": "NODE_ENV=production webpack --config  --progress --colors",
     "start": "node src/app/server.js",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
@@ -15,7 +16,9 @@
   "jest": {
     "globals": {
       "widow": true
-    }
+    },
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true
   },
   "repository": {
     "type": "git",
@@ -110,6 +113,8 @@
     "react-share": "^1.13.2",
     "sweetalert2": "^6.6.3",
     "webpack": "^*",
-    "webpack-dev-server": "^2.4.5"
+    "webpack-dev-server": "^2.4.5",
+    "webpack-dev-middleware": "^1.10.2",
+    "webpack-hot-middleware": "^2.18.0"
   }
 }

@@ -43,7 +43,14 @@ html, body {
   text-align: center;
 }
 .art{
-  min-height: 400px !important;
+  height: 420px !important;
+}
+.card-content {
+  height: 150px !important;
+}
+.my-image {
+  width: 100% !important;
+  height: 230px !important;
 }
 .clear{
   clear: both;

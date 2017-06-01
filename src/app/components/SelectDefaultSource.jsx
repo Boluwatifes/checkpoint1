@@ -8,7 +8,7 @@ import * as NewsAction from '../actions/NewsAction';
  * Create a react component
  * @class Sources
  */
-export default class Sources extends React.Component {
+export default class SelectDefaultSource extends React.Component {
   /**
    * Create a constructor
    * @constructor
@@ -20,6 +20,8 @@ export default class Sources extends React.Component {
       sources: {},
       loading: true,
     };
+
+    // bind the class methods to the class
     this.getSources = this.getSources.bind(this);
     this.setDefaultNews = this.setDefaultNews.bind(this);
   }
@@ -34,7 +36,8 @@ export default class Sources extends React.Component {
   }
 
   /**
-   * Add event Listener to the Sources Store and fires when the component is fully mounted
+   * Add event Listener to the Sources Store and
+   * fires when the component is fully mounted
    * @method componentDidMount
    * @returns {event} - register event
    */
@@ -52,18 +55,16 @@ export default class Sources extends React.Component {
   }
 
   /**
-   * gets the news sources and set the state
+   * gets the news sources and updates the state
    * @method getSources
    * @return {state} - Set sources to the state
    */
   getSources() {
     const rawSources = SourceStore.getSources();
-    if (rawSources) {
-      this.setState({
-        sources: rawSources,
-        loading: false,
-      });
-    }
+    this.setState({
+      sources: rawSources,
+      loading: false,
+    });
   }
 
   /**
@@ -91,20 +92,44 @@ export default class Sources extends React.Component {
         <option> Loading.... </option>
       );
     } else {
-      // map the sources to `AllSources`
+      // map the sources to `AllSources` when the sources has been loaded
       AllSources = this.state.sources.map(source => (
-        <option key={Math.random + source.name} value={source.id}>{source.name}</option>
+        <option
+          key={Math.random + source.name}
+          value={source.id}
+        >{source.name}</option>
       ));
     }
-    const user = JSON.parse(localStorage.user);
+
+    // gets the current user
+    const user = JSON.parse(localStorage.getItem('user'));
     return (
-      <div className="col s12 home-inner" >
+      <div className="col s12 home-inner" id="defaultSource">
         <div className="inner-content center m-auto">
           <span className="center">
-            <img alt="loading" src="imgs/welcome.gif" height="100" width="100" />
+            <img
+              alt="loading"
+              src="imgs/welcome.gif"
+              height="100"
+              width="100"
+            />
           </span>
-          <h5 className="center" style={{ color: 'white' }}>Welcome <span style={{ 'fontSize': '32px', 'color': 'green' }}>{getFirstName(user.name)}</span>,</h5>
-          <p className="center" style={{ color: 'white' }}> Please Select A News Source to continue </p>
+          <h5
+            className="center"
+            style={{ color: 'white' }}
+          >
+            Welcome
+          <span
+            style={{ 'fontSize': '32px', 'color': 'green' }}
+          >
+            {getFirstName(user.name)}
+          </span>,</h5>
+          <p
+            className="center"
+            style={{ color: 'white' }}
+          >
+            Please Select A News Source to continue
+          </p>
           <div>
             <span className="center">
               <SimpleSelect

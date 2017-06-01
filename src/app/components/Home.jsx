@@ -20,6 +20,8 @@ export default class Home extends React.Component {
 
   /**
    * Handles login success callback
+   * and save the user details to localstorage
+   * and reloads the page
    * @method responseGoogle
    * @param {object} response - Object returned from google login
    * @return {object} user - Stores user's data to local storage
@@ -58,11 +60,20 @@ export default class Home extends React.Component {
             <div className="section no-pad-bot">
               <div className="container">
                 <br /><br />
-                <h1 className="header center teal-text text-lighten-2">Hi Guest!</h1>
+                <h1
+                  className="header center teal-text text-lighten-2"
+                >
+                  Hi Guest!
+                </h1>
                 <div className="row center">
-                  <h5 className="header col s12 light" style={{ color: 'white' }}>NewsNinja&trade; brings to you all&nbsp;
+                  <h5
+                    className="header col s12 light"
+                    style={{ color: 'white' }}
+                  >
+                  NewsNinja&trade; brings to you all&nbsp;
                     your favorite news at your comfort. News can&#39;t&nbsp;
-                    get any better with 70+ news source!</h5>
+                    get any better with 70+ news source!
+                  </h5>
                 </div>
                 <div className="row center">
                   <GoogleLogin

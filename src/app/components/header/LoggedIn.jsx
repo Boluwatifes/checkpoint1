@@ -38,23 +38,51 @@ export default class LoggedIn extends React.Component {
    * @return {function} react-component
    */
   render() {
-    const user = JSON.parse(localStorage.user);
+    const user = JSON.parse(localStorage.getItem('user'));
     return (
-      <header>
+      <header id="header">
         <nav className="h-auto p-10">
           <div className="nav-wrapper">
             <Link className="brand-logo" to="/">NewsNinja</Link>
-            <a href="!#" data-activates="mobile-demo" className="button-collapse" id="nav">
+            <a
+              href="!#" data-activates="mobile-demo"
+              className="button-collapse" id="nav"
+            >
               <i className="material-icons">menu</i></a>
             <ul className="right hide-on-med-and-down">
               <li><Link to="/favorites">Favourites</Link></li>
-              <li><img className="avatar-img" src={user.image} alt="User Avatar" /></li>
-              <li><Link to="/logout" onClick={this.handleLogOut}>Logout</Link></li>
+              <li>
+                <img
+                  className="avatar-img"
+                  src={user.image}
+                  alt="User Avatar"
+                />
+              </li>
+              <li>
+                <Link
+                  to="/logout"
+                  onClick={this.handleLogOut}
+                >Logout
+                </Link>
+              </li>
             </ul>
             <ul className="side-nav" id="mobile-demo">
               <li><Link to="/favorites">Favourites</Link></li>
-              <li><img className="avatar-img" src={user.image} alt="User Avatar" /></li>
-              <li><Link to="/logout" onClick={this.handleLogOut}>Logout</Link></li>
+              <li>
+                <img
+                  className="avatar-img"
+                  src={user.image}
+                  alt="User Avatar"
+                />
+              </li>
+              <li>
+                <Link
+                  to="/logout"
+                  onClick={this.handleLogOut}
+                >
+                  Logout
+                </Link>
+              </li>
             </ul>
             <div className="clear" />
           </div>

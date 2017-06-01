@@ -17,7 +17,10 @@ export default class SortBy extends React.Component {
    */
   constructor(props) {
     super(props);
-    this.source = localStorage.defaultNews ? localStorage.defaultNews : 'bbc-news';
+    this.currentSource = this.props.currentSource;
+    // check the localstorage for defaultNews and
+    this.source = localStorage.getItem('defaultNews') ?
+      localStorage.getItem('defaultNews') : '';
     this.state = {
       sources: undefined,
       currentSource: this.source,
@@ -29,14 +32,15 @@ export default class SortBy extends React.Component {
   /**
    * Calls NewsAction when the component is about to mount
    * @method componentWilMount
-   * @returns {function} - calls news action and dispatch an action
+   * @returns {void} - calls news action and dispatch an action
    */
   componentWillMount() {
     NewsAction.getAllSources();
   }
 
   /**
-   * Add event Listener to the Sources Store and fires when the component is fully mounted
+   * Add event Listener to the Sources Store and
+   * fires when the component is fully mounted
    * @method componentDidMount
    * @returns {event} - register event
    */
@@ -73,11 +77,9 @@ export default class SortBy extends React.Component {
    */
   getSources() {
     const rawSources = SourceStore.getSources();
-    if (rawSources) {
-      this.setState({
-        sources: rawSources,
-      });
-    }
+    this.setState({
+      sources: rawSources,
+    });
   }
 
   /**
@@ -86,33 +88,53 @@ export default class SortBy extends React.Component {
    * @return {function} react-component
    */
   render() {
+    // uses function from the prop
     const handlesArticleSorting = this.props.handlesArticleSorting;
     let availableSortingParam;
     if (this.state.loading) {
+      // displays to the user when state.loading is true
       availableSortingParam = (
         <option> Loading.... </option>
       );
     } else {
       let getAvailableSorting;
+      // set default sorting param to top
+      // it changes as soon as the page loads
       if (this.state.sources === undefined) {
         getAvailableSorting = ['top'];
       } else {
-        getAvailableSorting = _.filter(this.state.sources, ['id', this.state.currentSource])[0].sortBysAvailable;
+        // gets the current sorting param
+        // available and save it
+        getAvailableSorting = _.filter(this.state.sources,
+        ['id', this.state.currentSource])[0].sortBysAvailable;
       }
+      // displays the sorting params in a select box
       availableSortingParam = getAvailableSorting.map(sort => (
         <option key={Math.random + sort}>{sort}</option>
       ));
     }
 
     return (
-      <SimpleSelect placeholder="Sort Articles" onValueChange={handlesArticleSorting}>
+      <SimpleSelect
+        placeholder="Sort Articles"
+        onValueChange={handlesArticleSorting}
+      >
         {availableSortingParam}
       </SimpleSelect>
     );
   }
 }
 
+// props validation
 SortBy.propTypes = {
   currentSource: PropTypes.string,
   handlesArticleSorting: PropTypes.func,
+};
+
+// default props
+SortBy.defaultProps = {
+  currentSource: 'bbc-news',
+  handlesArticleSorting: () => {
+    //
+  }
 };

@@ -1,0 +1,87 @@
+{
+  "status": "ok",
+  "source": "bbc-news",
+  "sortBy": "top",
+  "articles": [
+    {
+      "author": "BBC News",
+      "title": "British Airways: Flights cancelled amid IT crash",
+      "description": "All British Airways flights leaving Heathrow and Gatwick are cancelled until 18:00 BST.",
+      "url": "http://www.bbc.co.uk/news/uk-40069865",
+      "urlToImage": "https://ichef-1.bbci.co.uk/news/1024/cpsprodpb/9992/production/_96241393_michaelsingh.jpg",
+      "publishedAt": "2017-05-27T14:35:52+00:00"
+    },
+    {
+      "author": "BBC News",
+      "title": "British Airways: Computer problems hit passengers",
+      "description": "The airline says it has no evidence at this stage to suggest a cyber attack.",
+      "url": "http://www.bbc.co.uk/news/live/world-40069977",
+      "urlToImage": "http://www.bbc.co.uk/news/special/2015/newsspec_10857/bbc_news_logo.png?cb=1",
+      "publishedAt": null
+    },
+    {
+      "author": "BBC News",
+      "title": "Manchester attack: Terror threat reduced from critical to severe",
+      "description": "The national terrorism threat level comes down to severe, meaning an attack is likely, not imminent.",
+      "url": "http://www.bbc.co.uk/news/uk-40069959",
+      "urlToImage": "https://ichef-1.bbci.co.uk/news/1024/cpsprodpb/1423D/production/_96239428_moss_side_2_reu_crop.jpg",
+      "publishedAt": "2017-05-27T14:28:30+00:00"
+    },
+    {
+      "author": "BBC News",
+      "title": "IRA bombing campaign 'wrong' - Jeremy Corbyn",
+      "description": "Jeremy Corbyn seeks to distance himself from the IRA's actions in the Troubles, as the Tories step up criticism.",
+      "url": "http://www.bbc.co.uk/news/election-2017-40069744",
+      "urlToImage": "https://ichef-1.bbci.co.uk/news/1024/cpsprodpb/F374/production/_96242326_corb.jpg",
+      "publishedAt": "2017-05-27T13:49:21+00:00"
+    },
+    {
+      "author": "BBC News",
+      "title": "Chris Cornell: Friends and family at Soundgarden singer's funeral",
+      "description": "Friends and family attend the funeral of the Soundgarden singer at an LA cemetery.",
+      "url": "http://www.bbc.co.uk/news/world-40068749",
+      "urlToImage": "https://ichef.bbci.co.uk/news/1024/cpsprodpb/12BEF/production/_96238767_mediaitem96238766.jpg",
+      "publishedAt": "2017-05-27T07:30:45+00:00"
+    },
+    {
+      "author": "BBC Sport",
+      "title": "Scottish Cup final: Celtic 1-1 Aberdeen - Armstrong levels after Hayes opener",
+      "description": "TV, radio and text coverage of the Scottish Cup final as Celtic aim for a treble and Aberdeen try to win the trophy for the first time in 27 years.",
+      "url": "http://www.bbc.co.uk/sport/live/football/40049267",
+      "urlToImage": "http://newsimg.bbc.co.uk/media/images/67165000/jpg/_67165916_67165915.jpg",
+      "publishedAt": "2017-05-27T14:41:54"
+    },
+    {
+      "author": "BBC News",
+      "title": "G7 talks: Trump isolated over Paris climate change deal",
+      "description": "Germany called the climate change talks \"very unsatisfactory\", describing them as \"six against one\".",
+      "url": "http://www.bbc.co.uk/news/world-europe-40069636",
+      "urlToImage": "https://ichef-1.bbci.co.uk/news/1024/cpsprodpb/162A9/production/_96239709_mediaitem96239708.jpg",
+      "publishedAt": "2017-05-27T14:16:50+00:00"
+    },
+    {
+      "author": "BBC News",
+      "title": "Manchester attack: Editor defends publishing leaked photos",
+      "description": "The New York Times' decision to publish crime scene images was criticised by many in the UK.",
+      "url": "http://www.bbc.co.uk/news/av/uk-40067421/manchester-attack-editor-defends-publishing-leaked-photos",
+      "urlToImage": "https://ichef-1.bbci.co.uk/news/1024/cpsprodpb/65D9/production/_96237062_p0543w2h.jpg",
+      "publishedAt": "2017-05-26T22:12:27+00:00"
+    },
+    {
+      "author": "BBC News",
+      "title": "Portland deaths: Two stabbed trying to stop anti-Muslim abuse",
+      "description": "Two men are stabbed to death on a train in Portland as they try to stop a man abusing two women.",
+      "url": "http://www.bbc.co.uk/news/world-us-canada-40070319",
+      "urlToImage": "https://ichef-1.bbci.co.uk/news/1024/cpsprodpb/13244/production/_96240487_mediaitem96240483.jpg",
+      "publishedAt": "2017-05-27T12:55:02+00:00"
+    },
+    {
+      "author": "BBC News",
+      "title": "T in the Park death: Teenager's drink 'might have been spiked'",
+      "description": "Megan Bell died at T in the Park and had \"extremely high levels of ecstasy\" in her bloodstream.",
+      "url": "http://www.bbc.co.uk/news/uk-england-tyne-40064020",
+      "urlToImage": "https://ichef-1.bbci.co.uk/news/1024/cpsprodpb/36C7/production/_96232041_megan1.jpg",
+      "publishedAt": "2017-05-27T08:43:51+00:00"
+    }
+  ]
+}

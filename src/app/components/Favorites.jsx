@@ -1,5 +1,6 @@
 // import required dependencies
 import React from 'react';
+import swal from 'sweetalert2';
 import * as Actions from '../actions/NewsAction';
 import FavoriteStore from '../stores/FavoriteStore';
 import Articles from './Articles';
@@ -19,7 +20,7 @@ export default class Favorites extends React.Component {
   constructor() {
     super();
     this.state = {
-      favorites: {},
+      favorites: [],
       loading: true,
     };
     this.getFavourites = this.getFavourites.bind(this);
@@ -33,7 +34,7 @@ export default class Favorites extends React.Component {
    * @return {null} -
    */
   componentWillMount() {
-    const user = (JSON.parse(localStorage.user).id).toString();
+    const user = (JSON.parse(localStorage.getItem('user')).id).toString();
     Actions.getFavorites(user);
   }
 
@@ -79,9 +80,43 @@ export default class Favorites extends React.Component {
    * @return {null} -
    */
   deleteFavorite(title) {
-    const articleToDelete = title;
-    const userId = JSON.parse(localStorage.user).id;
-    Actions.deleteFavorite(articleToDelete, userId);
+    // displays a modal when user deletes favorites
+    swal({
+      title: 'Are you sure you want to delete?',
+      text: 'Pressing yes will remove it from your list of favorites!',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirm',
+      cancelButtonText: 'Cancel',
+      confirmButtonClass: 'btn btn-success',
+      cancelButtonClass: 'btn btn-danger',
+      buttonsStyling: false
+    }).then(() => {
+      // gets the title of the article to be deleted
+      const articleToDelete = title;
+      // gets the id of the user to know where to find article
+      const userId = JSON.parse(localStorage.getItem('user')).id;
+      // calls the delete favorite action method and deletes the article
+      Actions.deleteFavorite(articleToDelete, userId);
+      // display success modal on successful deletion
+      swal(
+        'Successful!',
+        'The article has been deleted from your list of favorites',
+        'success'
+      );
+    }, (dismiss) => {
+      // displays if the user clicks cancel
+      if (dismiss === 'cancel') {
+        swal(
+          'Action Cancelled',
+          'Your article is Safe!',
+          'error'
+        );
+      }
+    });
+    return true;
   }
 
   /**

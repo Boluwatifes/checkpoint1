@@ -19,22 +19,38 @@ import ReadArticle from './ReadArticle';
 
 const history = createBrowserHistory();
 
-const Layout = () => (
-  <Router history={history}>
-    <div className="width-100">
-      <Header />
-      <div className="row home-div m-0">
-        <Switch>
-          <Route exact path="/" component={localStorage.user ? ShowArticles : Home} />
-          <Route path="/favorites" component={localStorage.user ? Favorites : Home} />
-          <Route path="/article" component={ReadArticle} />
-          <Route component={NotFound} />
-          <div className="clear" />
-        </Switch>
+/**
+ * This is the main layout of the app. It house all other
+ * components in routes
+ * @function Layout
+ * @export
+ * @returns {any} - React Layout Component
+ */
+export default function Layout() {
+  return (
+    <Router history={history}>
+      <div className="width-100">
+        <Header />
+        <div className="row home-div m-0">
+          <Switch>
+            <Route
+              exact
+              path="/"
+              component={localStorage.getItem('user')
+               ? ShowArticles : Home}
+            />
+            <Route
+              path="/favorites"
+              component={localStorage.getItem('user')
+              ? Favorites : Home}
+            />
+            <Route path="/article" component={ReadArticle} />
+            <Route component={NotFound} />
+            <div className="clear" />
+          </Switch>
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
-  </Router>
-);
-
-export default Layout;
+    </Router>
+  );
+}

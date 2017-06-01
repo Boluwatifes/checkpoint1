@@ -40,6 +40,7 @@ export default class ReadArticle extends React.Component {
 
   /**
    * Attach an event listener to scrapeArticle store
+   * and get articles
    * @method componentDidMount
    * @memberof ReadArticle
    * @return {null} -
@@ -55,7 +56,7 @@ export default class ReadArticle extends React.Component {
    * @return {null} -
    */
   componentWillUnmount() {
-    ScrapeArticleStore.removeListener('change', this.proccessScrappedArticle);
+    ScrapeArticleStore.removeListener('change', this.processScrappedArticle);
   }
 
   /**
@@ -79,7 +80,9 @@ export default class ReadArticle extends React.Component {
    * @returns {any} -
    */
   render() {
+    // holds the component that get's displayed
     let DisplayArticle;
+    // import sharebuttons
     const {
       FacebookShareButton,
       GooglePlusShareButton,
@@ -94,14 +97,19 @@ export default class ReadArticle extends React.Component {
     const LinkedinIcon = generateShareIcon('linkedin');
     const PinterestIcon = generateShareIcon('pinterest');
     const WhatsappIcon = generateShareIcon('whatsapp');
+
+    // engages the user if the page is still loading
     if (this.state.loading) {
       DisplayArticle = (
         <div id="article">
-          <span className="center"><img alt="loading" src="imgs/loading.gif" /></span>
+          <span className="center">
+            <img alt="loading" src="imgs/loading.gif" />
+          </span>
           <p className="center">Please Wait .....</p>
         </div>
       );
     } else if (this.state.article === 'error') {
+      // displays an error if the article cannot be fetched
       DisplayArticle = (
         <div id="article">
           <h4>An error occur! Please try again later&nbsp;
@@ -116,6 +124,7 @@ export default class ReadArticle extends React.Component {
         </div>
       );
     } else {
+      // displays the article if it was scrapped successfully
       const article = this.state.article;
       DisplayArticle = (
         <div className="article-body" style={{ 'textAlign': 'left' }}>
@@ -123,10 +132,21 @@ export default class ReadArticle extends React.Component {
             <h3>{stripUrl(article.url)} NEWS</h3>
           </div>
           <div className="article-img">
-            <img src={article.image} alt={article.title} className="responsive-img" />
+            <img
+              src={article.image}
+              alt={article.title}
+              className="responsive-img"
+            />
           </div>
           <div className="share">
-            <span className="myIcons"><span><i className="material-icons">share</i></span></span>
+            <span className="myIcons">
+              <span>
+                <i
+                  className="material-icons"
+                >share
+                </i>
+              </span>
+            </span>
             <span className="myIcons" title="Share to Facebook">
               <FacebookShareButton
                 url={this.currentUrl}
@@ -209,10 +229,20 @@ export default class ReadArticle extends React.Component {
             <h4 style={{ 'fontSize': '2rem' }}>{article.title}</h4>
           </div>
           <div className="article-desc">
-            <h6 style={{ 'fontSize': '22px', 'fontWeight': '300' }}>{article.description}</h6>
+            <h6
+              style={{ 'fontSize': '22px', 'fontWeight': '300' }}
+            >{article.description}
+            </h6>
           </div>
           <div className="article-body">
-            <p style={{ 'fontSize': '18px', 'lineHeight': '35px', 'wordSpacing': '5px' }}>{article.body}</p>
+            <p
+              style={{
+                'fontSize': '18px',
+                'lineHeight': '35px',
+                'wordSpacing': '5px' }}
+            >
+              {article.body}
+            </p>
           </div>
           <div className="clear" />
         </div>
@@ -236,10 +266,16 @@ export default class ReadArticle extends React.Component {
   }
 }
 
+// props validation
 ReadArticle.propTypes = {
-  location: {
-    search: PropTypes.any,
-  }
+  location: PropTypes.shape({
+    search: PropTypes.string,
+  })
 };
 
-
+// set default props
+ReadArticle.defaultProps = {
+  location: PropTypes.shape({
+    search: 'localhost',
+  })
+};

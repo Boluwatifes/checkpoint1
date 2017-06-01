@@ -1,0 +1,38 @@
+[
+    {
+      "author": "BBC News",
+      "title": "British Airways: Flights cancelled amid IT crash",
+      "description": "All British Airways flights leaving Heathrow and Gatwick are cancelled until 18:00 BST.",
+      "url": "http://www.bbc.co.uk/news/uk-40069865",
+      "urlToImage": "https://ichef-1.bbci.co.uk/news/1024/cpsprodpb/9992/production/_96241393_michaelsingh.jpg",
+      "publishedAt": "2017-05-27T14:35:52+00:00",
+      "source": "bbc-news"
+    },
+    {
+      "author": "BBC News",
+      "title": "British Airways: Computer problems hit passengers",
+      "description": "The airline says it has no evidence at this stage to suggest a cyber attack.",
+      "url": "http://www.bbc.co.uk/news/live/world-40069977",
+      "urlToImage": "http://www.bbc.co.uk/news/special/2015/newsspec_10857/bbc_news_logo.png?cb=1",
+      "publishedAt": null,
+      "source": "bbc-news"
+    },
+    {
+      "author": "BBC News",
+      "title": "Manchester attack: Terror threat reduced from critical to severe",
+      "description": "The national terrorism threat level comes down to severe, meaning an attack is likely, not imminent.",
+      "url": "http://www.bbc.co.uk/news/uk-40069959",
+      "urlToImage": "https://ichef-1.bbci.co.uk/news/1024/cpsprodpb/1423D/production/_96239428_moss_side_2_reu_crop.jpg",
+      "publishedAt": "2017-05-27T14:28:30+00:00",
+      "source": "bbc-news"
+    },
+    {
+      "author": "BBC News",
+      "title": "IRA bombing campaign 'wrong' - Jeremy Corbyn",
+      "description": "Jeremy Corbyn seeks to distance himself from the IRA's actions in the Troubles, as the Tories step up criticism.",
+      "url": "http://www.bbc.co.uk/news/election-2017-40069744",
+      "urlToImage": "https://ichef-1.bbci.co.uk/news/1024/cpsprodpb/F374/production/_96242326_corb.jpg",
+      "publishedAt": "2017-05-27T13:49:21+00:00",
+      "source": "bbc-news"
+    }
+]

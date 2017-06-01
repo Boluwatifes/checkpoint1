@@ -39,7 +39,7 @@ class ArticlesStore extends EventEmitter {
   }
 }
 
-// create a new instance of `NewsStore`
+// create a new instance of `ArticlesStore`
 const articlesStore = new ArticlesStore();
 
 // register a dispatcher and bind it to the `handleAction` method

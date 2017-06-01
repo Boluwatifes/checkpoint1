@@ -1,11 +1,12 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import sinon from 'sinon';
-import '../utils/firebase-config';
+import '../../src/app/test_files/firebase-config';
 
 import Articles from '../../src/app/components/Articles';
 import localStorageMock from '../../src/app/__mock__/localStorage';
 import articlesMock from '../../src/app/__mock__/articles';
+// import sampleArticles from '../../src/app/__mock__/sampleArticles.json';
 
 jest.dontMock('../../src/app/utils/helpers');
 
@@ -49,12 +50,30 @@ describe('Articles', () => {
     expect(spy.calledOnce).toEqual(false);
     wrapper.setProps(articles);
     expect(spy.calledOnce).toEqual(true);
-    // const propsReceived = Articles.componentWillReceiveProps(articles);
-    // expect(spy).toHaveBeenCalled();
   });
 
   it('contains a saveUsersFavorites method', () => {
     expect(wrapper.instance().saveUsersFavorites(0)).toEqual(undefined);
+  });
+
+  it('saves favorite on button click', () => {
+    const spy = sinon.spy(Articles.prototype,
+    'saveUsersFavorites');
+    const shallowWrapper = shallow(<Articles />);
+    shallowWrapper.instance().componentWillReceiveProps({ articles });
+    shallowWrapper.find('#addFav').simulate('click');
+    expect(spy.calledOnce).toBeTruthy();
+  });
+
+  it('deletes favorite on button click', () => {
+    const deleteFavorite = sinon.stub();
+    const shallowWrapper = shallow(<Articles
+      type="favorite"
+      deleteFavorite={deleteFavorite}
+    />);
+    shallowWrapper.instance().componentWillReceiveProps({ articles });
+    shallowWrapper.find('#deleteFav').simulate('click');
+    expect(deleteFavorite.calledOnce).toBeTruthy();
   });
 });
 
