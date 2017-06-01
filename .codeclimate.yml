@@ -13,6 +13,6 @@ ratings:
   paths:
   - "**.js"
 exclude_paths:
-- node_modules/**/*
-- test/**/*
-- src/public/**/*
+- "node_modules/"
+- "__tests_/"
+- "src/public/"

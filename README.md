@@ -1,7 +1,6 @@
 ### NewsNinja - The modest News App!
 
 [![Code Climate](https://codeclimate.com/github/andela-dbamidele/checkpoint1/badges/gpa.svg)](https://codeclimate.com/github/andela-dbamidele/checkpoint1)
-[![Coverage Status](https://coveralls.io/repos/github/andela-dbamidele/checkpoint1/badge.svg?branch=master)](https://coveralls.io/github/andela-dbamidele/checkpoint1?branch=master)
 [![Issue Count](https://codeclimate.com/github/andela-dbamidele/checkpoint1/badges/issue_count.svg)](https://codeclimate.com/github/andela-dbamidele/checkpoint1)
 [![Build Status](https://travis-ci.org/andela-dbamidele/checkpoint1.svg?branch=master)](https://travis-ci.org/andela-dbamidele/checkpoint1)
 [![codecov](https://codecov.io/gh/andela-dbamidele/checkpoint1/branch/master/graph/badge.svg)](https://codecov.io/gh/andela-dbamidele/checkpoint1)
