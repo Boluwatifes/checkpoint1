@@ -16,7 +16,9 @@ module.exports = {
         loader: 'babel-loader',
         query: {
           presets: ['react', 'es2015', 'stage-0'],
-          plugins: ['react-html-attrs', 'transform-decorators-legacy', 'transform-class-properties'],
+          plugins: ['react-html-attrs',
+            'transform-decorators-legacy',
+            'transform-class-properties'],
         },
       },
       {
@@ -40,7 +42,8 @@ module.exports = {
         test: /\.(jpe?g|png|gif|svg)$/i,
         loaders: [
           'file-loader?hash=sha512&digest=hex&name=[hash].[ext]',
-          'image-webpack-loader?bypassOnDebug&optimizationLevel=7&interlaced=false'
+          'image-webpack-loader?' +
+          'bypassOnDebug&optimizationLevel=7&interlaced=false'
         ]
       },
     ],

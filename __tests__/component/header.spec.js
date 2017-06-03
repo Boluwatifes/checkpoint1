@@ -9,7 +9,8 @@ window.localStorage = localStorageMock;
 
 describe('Header Component', () => {
   describe('Test for sessions', () => {
-    it('should display <NotLoggedIn /> component if the user is not logged in', () => {
+    it('should display <NotLoggedIn />' +
+      ' component if the user is not logged in', () => {
       const wrapper = shallow(<Header />);
       expect(wrapper.node.type).toEqual(NotLoggedIn);
     });
